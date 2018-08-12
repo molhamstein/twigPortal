@@ -1,0 +1,122 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <!--ng-click="vm.gotoItems()"-->
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.feelings"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+                <div class="h2">                  
+                    <span translate="{{translate + 'ADD_ITEM'}}">Add Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span translate="{{translate + 'SAVE'}}">Save</span>
+            </md-button>            
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row" flex>                   
+            <md-card md-theme-watch flex>                 
+                <md-card-content>
+                    <md-list>                                                  
+                        <md-list-item class="md-2-line" flex >
+                            <md-icon>insert_emoticon</md-icon>
+                            <md-input-container>
+                                <label translate="FEELINGS.NAME">name</label>
+                                <input ng-model="vm.item.name"  required/>
+                            </md-input-container>                              
+                        </md-list-item>                                              
+                        <md-list-item class="md-2-line" flex >
+                            <md-switch ng-model="vm.item.visible_home" aria-label="Switch 1">
+                                Visible Home
+                            </md-switch>                                                  
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <md-switch ng-model="vm.item.visible_twig" aria-label="Switch 2">
+                                Visible Twig
+                            </md-switch>                                                  
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <md-input-container>
+                                <label translate="TWIGS.CATEGORY">Category</label>
+                                <md-icon>menu</md-icon>    
+                                <md-select ng-model="vm.item.categories"
+                                           md-on-close="clearSearchTerm()"                                      
+                                           required multiple>
+                                    <md-select-header>
+                                        <input ng-model="searchTerm"
+                                               type="search"
+                                               placeholder="Search for a category.."
+                                               class="md-text"/>
+                                    </md-select-header>        
+                                    <md-optgroup>
+                                        <md-option ng-value="c" 
+                                                   ng-repeat="c in vm.categories| filter:searchTerm">{{c.name}}</md-option>                                
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>      
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>                     
+            </md-card>
+            <md-card md-theme-watch flex> 
+                <md-list layout="column" layout-align="space-between">                                                  
+                    <md-list-item class="md-2-line" flex >                           
+                        <div class="avatar-head"  layout="row" layout-align="center end">
+                            <div >                   
+                                <img  ngf-thumbnail="file1 || defaultBackground" alt="user-avatar" class="md-avatar">                               
+                            </div>
+                            <div>
+                                <div class="fileUpload">
+                                    <md-button 
+                                        class="md-icon-button" 
+                                        ngf-select
+                                        ng-model="file1"
+                                        name="file" 
+                                        ngf-pattern="'image/*'"
+                                        ngf-accept="'image/*'"                                      
+                                        >
+                                        <md-icon class="material-icons "> photo_camera</md-icon>
+                                    </md-button>                                       
+                                </div>
+                                <div class="fileUpload">
+                                    <md-button ng-click="file1 = null;
+                                        file1 = ''"                                            
+                                               class="md-icon-button" >
+                                        <md-icon class="material-icons "> clear</md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>                            
+                        <div class="md-list-item-text">                                              
+                            <p translate="FEELINGS.ICON">Icon</p>
+                        </div>                                                             
+                    </md-list-item>
+                    <md-list-item class="md-2-line color-picker" flex>
+                        <div
+                            md-color-picker
+                            required
+                            ng-model="vm.item.color"
+                            label="Color"
+                            icon="brush"
+                            default="#f00"
+                            md-color-generic-palette="false"
+                            md-color-history="false"
+                            ></div>
+
+                                                     
+                    </md-list-item>
+                </md-list>
+            </md-card>
+        </div> 
+    </md-content>  
+</div>

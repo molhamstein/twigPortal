@@ -1,0 +1,226 @@
+<div class="twig add-item page-layout  tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg " layout="row" layout-align="space-between center" flex>
+            <div>
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.twigs"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <!--<span translate="TWIGS.ITEMS">Twigs</span>-->
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-raised md-background "
+                           ui-sref="app.twigs.add-twig"
+                           aria-label="add item" translate translate-attr-aria-label="TWIGS.ADD_ITEM">
+                    {{"TWIGS.ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="TWIGS.EDIT_ITEM">
+                    {{"TWIGS.EDIT_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="TWIGS.DELETE_ITEM">
+                    {{"TWIGS.DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row">
+            <md-card md-theme-watch flex>
+                <img  src="{{vm.item.media  ||  defaultBackground}}" class="md-card-image" alt="twig">
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-icon>account_circle</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.user.name}}</h3>
+                                <p translate="TWIGS.USER">User</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line md-long-text">
+                            <md-icon>description</md-icon>
+                            <div class="md-list-item-text ">
+                                <h3>{{vm.item.description}}</h3>
+                                <p translate="TWIGS.DESCRIPTION">Description</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" ng-if="vm.item.btns.length!==0">
+                            <md-button class="md-raised"
+                                       ng-style="{'background-color':vm.item.btns[0].color}"
+                                       ng-class="{'active-btn':vm.item.btns[0].status === 'Active'}" flex>
+                                {{vm.item.btns[0].title}}
+                                <md-icon>{{vm.item.btns[0].icon}}</md-icon>
+                                <small>({{vm.item.btns[0].type}})</small>
+                                <md-tooltip>{{vm.item.btns[0].action}}</md-tooltip>
+                            </md-button>
+<!--                            <div class="md-list-item-text ">
+                                <p translate="TWIGS.TWIG_BTN">Twig Button</p>
+                            </div>          -->
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+            <md-card md-theme-watch flex>
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.category.name}}</h3>
+                                <p translate="TWIGS.CATEGORY">Category</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" ng-if="vm.item.location && vm.item.location!==''">
+                            <md-icon>room</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.location.name}}</h3>
+                                <p translate="TWIGS.LOCATION">Location</p>
+                            </div>
+                        </md-list-item>
+                         <md-list-item class="md-2-line" ng-if="!vm.item.location && vm.item.business && vm.item.business!==''">
+                            <md-icon>business</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.business.name}}</h3>
+                                <p translate="TWIGS.BUSINESS">business</p>
+                            </div>
+                        </md-list-item>
+                         <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>
+                            <md-chips ng-model="vm.item.feelings" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3 ng-repeat="p in vm.item.tags">{{p.name}}</h3>-->
+                                <p translate="TWIGS.FEELINGS">Feelings</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>attach_money</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.price}}</h3>
+                                <p translate="TWIGS.PRICE">Price</p>
+                            </div>
+                        </md-list-item>
+
+                         <md-list-item class="md-2-line">
+                            <md-icon>attach_money</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.transformed_price}}</h3>
+                                <p translate="TWIGS.TRANSFORMED_PRICE">Transformed Price</p>
+                            </div>
+                        </md-list-item>
+                         <md-list-item class="md-2-line" layout='row' layout-align='space-between'>
+                            <!--<md-icon>attach_money</md-icon>-->
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.yeses}}</h3>
+                                <p translate="TWIGS.YESES">Yeses</p>
+                            </div>
+                             <div class="md-list-item-text">
+                                <h3>{{vm.item.nos}}</h3>
+                                <p translate="TWIGS.NOS">Nos</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>attach_money</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.is_exceptional}}</h3>
+                                <p translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</p>
+                            </div>
+                        </md-list-item>
+                                     <md-list-item class="md-2-line">
+                            <md-icon>insert_invitation</md-icon>
+                            <md-chips ng-model="vm.item.products" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3  ng-repeat="p in vm.item.products">{{p.name}}</h3>-->
+                                <p translate="TWIGS.PRODUCTS">Products</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>local_offer</md-icon>
+                            <md-chips ng-model="vm.item.tags" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3 ng-repeat="p in vm.item.tags">{{p.name}}</h3>-->
+                                <p translate="TWIGS.TAGS">Tags</p>
+                            </div>
+                        </md-list-item>
+
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div layout="row" flex>
+             <md-card md-theme-watch flex>
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-2-line" >
+
+                            <md-slider-container flex>
+                                <span  translate="TWIGS.REASONABLE_PRICE">Reasonable Price Average</span>
+                                <md-slider ng-readonly="" ng-disabled="true" flex class="md-primary" md-discrete ng-model="vm.item.reasonable_price" step="1" min="1" max="5" aria-label="rating"></md-slider>
+                                <md-input-container>
+                                    <input disabled flex type="number" ng-model="vm.item.reasonable_price" aria-label="slider" aria-controls="slider">
+                                </md-input-container>
+                            </md-slider-container>
+                        </md-list-item>
+
+                        <md-list-item class="md-2-line" >
+                            <md-slider-container flex>
+                                <span flex="15" translate="TWIGS.QUALITY">Quality Average</span>
+                                <md-slider ng-readonly="" ng-disabled="true"   flex class="md-primary" md-discrete ng-model="vm.item.quality" step="1" min="1" max="5" aria-label="rating">
+                                </md-slider>
+                                <md-input-container>
+                                    <input disabled flex type="number" ng-model="vm.item.quality" aria-label="slider" aria-controls="slider">
+                                </md-input-container>
+                            </md-slider-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <md-slider-container flex>
+                                <span flex="15"  translate="TWIGS.SERVICE">Service Average</span>
+                                <md-slider ng-readonly="" ng-disabled="true"  flex class="md-primary" md-discrete ng-model="vm.item.service" step="1" min="1" max="5" aria-label="rating"></md-slider>
+                                <md-input-container>
+                                    <input disabled flex type="number" ng-model="vm.item.service" aria-label="slider" aria-controls="slider">
+                                </md-input-container>
+                            </md-slider-container>
+
+                        </md-list-item>
+                        <md-list-item class="md-2-line" >
+                            <md-slider-container flex>
+                                <span flex="15" translate="TWIGS.AMBIANCE">Ambiance Average</span>
+                                <md-slider ng-readonly="" ng-disabled="true"  flex class="md-primary" md-discrete ng-model="vm.item.ambiance" step="1" min="1" max="5" aria-label="rating"></md-slider>
+                                <md-input-container>
+                                    <input disabled flex type="number" ng-model="vm.item.ambiance" aria-label="slider" aria-controls="slider">
+                                </md-input-container>
+                            </md-slider-container>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>

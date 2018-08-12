@@ -1,0 +1,105 @@
+<div class="feeling page-layout add-item tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg " layout="row" layout-align="space-between center" flex>   
+            <div layout="row">
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.feelings"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <!--<span translate="FEELINGS.ITEMS">feelings</span>-->
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-raised md-background "                   
+                           ui-sref="app.twigs.add-twig"
+                           aria-label="add item" translate translate-attr-aria-label="FEELINGS.ADD_ITEM">
+                    {{translate + "ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "                      
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="FEELINGS.EDIT_ITEM">
+                    {{translate + "EDIT_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "                 
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="FEELINGS.DELETE_ITEM">
+                    {{translate + "DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row">
+            <md-card md-theme-watch flex>
+                <md-card-content layout="row">
+                    <md-list>    
+                        <md-list-item class="md-2-line">   
+                            <md-card-header>
+                                <md-card-avatar>
+                                    <img class="md-user-avatar" src="{{vm.item.icon}}"/>
+                                </md-card-avatar>                                
+                            </md-card-header>      
+                            <!--<md-icon>insert_emoticon</md-icon>-->
+                            <div class="md-list-item-text">                                
+                                <h3>{{vm.item.name}}</h3>
+                                <p translate="FEELINGS.NAME">name</p>
+                            </div>                                 
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <!--<md-icon ng-style="vm.item.visible_home === 0 && {'color':'red'} || {'color':'green'}">brightness1</md-icon>-->                                   
+                            <div class="md-list-item-text">
+                                <h3 ng-show="vm.item.visible_home === 1">Yes</h3>
+                                <h3 ng-show="vm.item.visible_home === 0">No</h3>
+                                <p translate="FEELINGS.VISIBLE_HOME">Visible Home</p>
+                            </div>                                 
+                        </md-list-item>
+                        <md-list-item class="md-2-line">                           
+                            <!--<md-icon ng-style="vm.item.visible_twig === 0 && {'color':'red'}|| {'color':'green'}">brightness1</md-icon>-->                                   
+                            <div class="md-list-item-text">
+                                <h3 ng-show="vm.item.visible_twig === 1">Yes</h3>
+                                <h3 ng-show="vm.item.visible_twig === 0">No</h3>                                
+                                <p translate="FEELINGS.VISIBLE_TWIG">Visible Twig</p>
+                            </div>                                 
+                        </md-list-item>                                                      
+                    </md-list>
+
+                </md-card-content>                     
+            </md-card>
+            <md-card md-theme-watch flex> 
+                <md-card-content>
+                    <md-list layout="column" layout-align="space-between">                         
+                        <md-list-item class="md-2-line">
+                            <md-icon ng-style="{'background-color':'#'+vm.item.color}">brightness1</md-icon>  
+                            <div class="md-list-item-text">                                              
+                                <p translate="FEELINGS.COLOR">Color</p>
+                            </div>                                 
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>                                   
+                            <md-chips ng-model="vm.item.categories" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3 ng-repeat="p in vm.item.tags">{{p.name}}</h3>-->
+                                <p translate="FEELINGS.CATEGORIES">Categories</p>
+                            </div>                                      
+                        </md-list-item>      
+                    </md-list>                   
+                </md-card-content>                      
+            </md-card>                            
+        </div>  
+    </md-content>
+    <!-- / CONTENT -->
+</div>

@@ -1,0 +1,135 @@
+<div class="items page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div st-pipe="vm.callServer" st-table="displayed" class="center" layout="column" flex>
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon>tag_faces</md-icon>
+                    <span translate="FEELINGS.ITEMS">Items</span>
+                </div>
+                <div class="order-count secondary-text">
+                    <span translate="FEELINGS.ALL_ITEMS">Total Items: </span>
+                    <span>{{total_pages}}</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>
+                <md-input-container flex>
+                     <md-icon class="white-text icon search-icon">search</md-icon>
+                    <label>{{'USERS.SEARCH'| translate}}</label>
+                    <input ng-model="searchKeyword" flex>
+                </md-input-container>            
+            </div>
+            <div>
+                <!--                <md-button class="md-raised md-background" id="delete-item-button"
+                                           ng-click="vm.deleteSelectedItems($event)"
+                                           aria-label="add item"vtranslate-attr-aria-label="TWIGS.DELETE_ITEM">
+                                    {{"TWIGS.DELETE_ITEM"| translate}}
+                                </md-button>-->
+
+                <md-button class="md-raised md-background n" id="add-item-button"                      
+                           ui-sref="app.feelings.add-feeling"
+                           aria-label="add item" translate translate-attr-aria-label="FEELINGS.ADD_ITEM">
+                    {{"FEELINGS.ADD_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table class="dataTable row-border hover table table-striped">
+                    <thead>
+                        <!--9-->
+                        <tr>             
+                            <th  st-sort="id">  ID   </th>
+                            <th  >Icon    </th>                                                           
+                            <th st-sort="name">Name</th>   
+                            <th>Color</th>                         
+                            <th st-sort="visible_home">Visible Home </th>    
+                            <th st-sort="visible_twig">Visible Twig </th>    
+                            <th>Categories</th>    
+                            <th></th>
+                        </tr>                                    
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in displayed | filter: searchKeyword" ng-click="vm.itemDetails(item.id)">                         
+                            <td  >{{item.id}}</td>
+                            <td  ><img class="item-image-no-border" ng-src="{{item.icon}}"></td>
+                            <!--<td  ng-click="vm.itemDetails(item.id)"><img class="item-image" ng-src="{{item.media}}"></td>-->   
+                            <td  >{{item.name}}</td>
+                            <td >
+                                <div ng-style="{'background-color': '#'+item.color}" style='width:20px;height:20px'></div>
+                               </td>
+                            <td >
+                                <span ng-if="item.visible_home === 1"><i style="padding: 0 10px" class="icon-checkbox-marked-circle green-500-fg"></i></span>
+                                <span ng-if="item.visible_home === 0"><i style="padding: 0 10px" class="icon-cancel red-500-fg"></i></span>
+                            </td>
+                            <!--<td>{{item.reasonable_price}}</td>-->
+                            <td >
+                                <span ng-if="item.visible_twig === 1"><i style="padding: 0 10px" class="icon-checkbox-marked-circle green-500-fg"></i></span>
+                                <span ng-if="item.visible_twig === 0"><i style="padding: 0 10px" class="icon-cancel red-500-fg"></i></span>
+                            </td>                   
+                            <td  >
+                                <span ng-repeat="c in item.categories">{{c.name}} <span ng-hide="$last">,</span></span>                                       
+                            </td>                                                                      
+                            <td>
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="More" translate
+                                   translate-attr-aria-label="FEELINGS.MORE" ng-click="$mdOpenMenu($event)">
+                            <md-icon >more_vert</md-icon>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>                                
+                                <md-button 
+                                    ng-click="vm.editItem(item)"                                   
+                                    translate="FEELINGS.EDIT_ITEM">  
+                                    Edit item
+                                </md-button>
+                            </md-menu-item>    
+                            <md-menu-item>
+                                <md-button ng-click="vm.deleteItemConfirm(item, ev)"
+                                           translate="FEELINGS.DELETE_ITEM">
+                                    Delete item
+                                </md-button>
+                            </md-menu-item> 
+                        </md-menu-content>
+                    </md-menu>
+                    </td>
+                    </tr>
+                    </tbody>
+                    <tbody ng-show="vm.isLoading">
+                        <tr>
+                            <td colspan="12" class="text-center">Loading ... </td>
+                        </tr>
+                    </tbody>                   
+                    <tfoot >
+                        <tr >
+                            <td st-pagination=""  st-items-by-page="itemsByPage" st-displayed-pages="20" colspan="11"> </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+
+    </div>
+    <!-- / CENTER -->
+
+</div>
+
+
+

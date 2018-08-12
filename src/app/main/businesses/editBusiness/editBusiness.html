@@ -1,0 +1,448 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                       ui-sref="app.businesses"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <span translate="{{translate + 'EDIT_ITEM'}}">Edit Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid"
+                       aria-label="SAVE"
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span translate="{{translate + 'SAVE'}}">Save</span>
+            </md-button>
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+
+        <div layout="row" flex>
+            <div layout="column" flex="50">
+                <md-card>
+                    <md-card-title flex="none">
+                        <md-card-title-text>
+                            <md-list>
+                                <md-list-item class="md-2-line" flex>
+                                    <md-input-container flex>
+                                        <md-icon>business</md-icon>
+                                        <label>{{"BUSINESSES.NAME"| translate}}</label>
+                                        <input ng-model="vm.item.name" type="text" required flex>
+                                    </md-input-container>
+                                </md-list-item>
+
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="no-margin-icon">account_box</md-icon>
+                                    <md-autocomplete                  flex
+                                                                      required
+                                                                      md-delay="2000"
+                                                                      md-no-cache="false"
+                                                                      md-selected-item="selectedUser"
+                                                                      md-search-text-change="searchUserChange(searchUser)"
+                                                                      md-search-text="searchUser"
+                                                                      md-selected-item-change="selectedUserChange(i)"
+                                                                      md-items="i in onChangeUser(searchUser)"
+                                                                      md-item-text="i.name"
+                                                                      md-min-length="0"
+                                                                      md-floating-label="{{'BUSINESSES.USER'| translate}}">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchUser" md-highlight-flags="^i">{{i.name}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No users matching {{searchUser}} were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </md-list-item>
+                            </md-list>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-lg card-media">
+                                <!--<img  src="{{vm.item.logo||  defaultBackground}}" class="md-card-image" alt="business">-->
+                                <img  ngf-thumbnail="vm.item.logo || defaultBackground" class=" md-card-image" alt="business">
+                                <div  layout="row" layout-align="center end">
+                                    <div class="fileUpload">
+                                        <md-button
+                                            class="md-icon-button"
+                                            ngf-select
+                                            ng-model="vm.item.logo"
+                                            name="file"
+                                            ngf-pattern="'image/*'"
+                                            ngf-accept="'image/*'"
+                                            ngf-resize="{ratio:'6:4',quality: .9,centerCrop: true}">
+                                            <md-icon class="material-icons "> photo_camera</md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div class="fileUpload">
+                                        <md-button ng-click="vm.item.logo = null;
+                                            vm.item.logo = ''" class="md-icon-button" >
+                                            <md-icon class="material-icons "> clear</md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-card-title-media>
+                    </md-card-title>
+                </md-card>
+                <!--                <img  ngf-thumbnail="vm.item.license_image || defaultBackground" class=" md-card-image" alt="avatar">
+                                <div  layout="row" layout-align="center end">
+                                    <div class="fileUpload">
+                                        <md-button
+                                            class="md-icon-button"
+                                            ngf-select
+                                            ng-model="vm.item.license_image"
+
+                                            name="file"
+                                            ngf-pattern="'image/*'"
+                                            ngf-accept="'image/*'"
+                                            ngf-resize="{ratio:'6:4',quality: .9,centerCrop: true}">
+                                            <md-icon class="material-icons "> photo_camera</md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div class="fileUpload">
+                                        <md-button ng-click="vm.item.license_image = null;
+                                            vm.item.license_image = ''" class="md-icon-button" >
+                                            <md-icon class="material-icons "> clear</md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>       -->
+                <md-card>
+                    <md-list>
+
+                                                <md-item-list class="locations-chips"  flex="95" layout="row" layout-align="space-around start">
+                                                    <md-icon class="no-margin-icon">location_on</md-icon>
+                                                    <md-contact-chips flex="90"
+                                                                      ng-model="vm.item.locations"
+                                                                      md-contacts="onChangeAddress($query)"
+                                                                      md-contact-name="name"
+                                                                      md-contact-image="photo"
+                                                                      md-require-match="true"
+                                                                      md-highlight-flags="i"
+                                                                      filter-selected="true"
+                                                                      placeholder="{{'BUSINESSES.LOCATIONS'| translate}}">
+                                                    </md-contact-chips>
+                                                </md-item-list>
+                        <md-list-item class="md-2-line" flex >
+                            <md-icon class="no-margin-icon">location_on</md-icon>
+                            <md-autocomplete                  flex
+                                                              md-delay="1000"
+                                                              md-no-cache="false"
+                                                              md-selected-item="selectedCountry"
+                                                              md-search-text-change="searchCountryChange(searchCountry)"
+                                                              md-search-text="searchCountry"
+                                                              md-selected-item-change="selectedCountryChange(i)"
+                                                              md-items="i in onChangeCountry(searchCountry)"
+                                                              md-item-text="i.short_name"
+                                                              md-min-length="0"
+                                                              md-floating-label="{{'BUSINESSES.COUNTRY'| translate}}"
+                                                              >
+                                <md-item-template>
+                                    <span md-highlight-text="searchCountry" md-highlight-flags="^i">{{i.short_name}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No countries matching {{searchCountry}} were found.
+                                    <!--<a ng-click="newState(searchText)">Create a new one!</a>-->
+                                </md-not-found>
+                            </md-autocomplete>
+                        </md-list-item>
+
+                        <!--                    <md-list-item class="md-2-line" flex >
+                                                <md-icon class="no-margin-icon">location_on</md-icon>
+                                                <md-autocomplete                  flex
+                                                                                  required
+                                                                                  md-delay="2000"
+                                                                                  md-no-cache="false"
+                                                                                  md-selected-item="selectedLocation"
+                                                                                  md-search-text-change="searchLocationChange(searchLocation)"
+                                                                                  md-search-text="searchLocation"
+                                                                                  md-selected-item-change="selectedLocationChange(i)"
+                                                                                  md-items="i in onChangeAddress(searchLocation)"
+                                                                                  md-item-text="i.name"
+                                                                                  md-min-length="0"
+                                                                                  md-floating-label="{{'BUSINESSES.LOCATION'| translate}}">
+                                                    <md-item-template>
+                                                        <span md-highlight-text="searchLocation" md-highlight-flags="^i">{{i.name}}</span>
+                                                    </md-item-template>
+                                                    <md-not-found>
+                                                        No Locations matching {{searchLocation}} were found.
+                                                    </md-not-found>
+                                                </md-autocomplete>
+                                            </md-list-item>  -->
+
+                        <!--<md-list-item class="md-2-line" flex >-->
+
+                        <!--<md-icon class="no-margin-icon">menu</md-icon>-->
+                        <!--                        <md-autocomplete                  flex
+
+                                                                                  md-delay="2000"
+                                                                                  md-no-cache="false"
+                                                                                  md-selected-item="selectedIndustry"
+                                                                                  md-search-text-change="searchIndustryChange(searchIndustry)"
+                                                                                  md-search-text="searchIndustry"
+                                                                                  md-selected-item-change="selectedIndustryChange(i)"
+                                                                                  md-items="i in onChangeIndustry(searchIndustry)"
+                                                                                  md-item-text="i.name"
+                                                                                  md-min-length="0"
+                                                                                  md-floating-label="{{'BUSINESSES.INDUSTRY'| translate}}">
+                                                    <md-item-template>
+                                                        <span md-highlight-text="searchIndustry" md-highlight-flags="^i">{{i.name}}</span>
+                                                    </md-item-template>
+                                                    <md-not-found>
+                                                        No Locations matching {{searchLocation}} were found.
+                                                        <a ng-click="newState(searchText)">Create a new one!</a>
+                                                    </md-not-found>
+                                                </md-autocomplete>                             -->
+                        <!--</md-list-item>-->
+                        <md-list-item class="md-2-line" flex >
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.CATEGORY">Category</label>
+                                <md-icon>menu</md-icon>
+                                <md-select ng-model="vm.selectedCategories"
+                                           required
+                                           multiple
+                                           ng-model-options="{trackBy: '$value.id'}">
+                                    <md-optgroup>
+                                        <md-option ng-value="c"
+                                                   ng-repeat="c in vm.categories">{{c.name}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.PRODUCTS">Products</label>
+                                <md-icon>menu</md-icon>
+                                <md-select ng-model="vm.selectedProducts"
+                                           multiple>
+                                    <md-optgroup>
+                                        <md-option ng-value="c"
+                                                   ng-repeat="c in vm.products">{{c.name}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>attach_money</md-icon>
+                                <label>{{"BUSINESSES.SCORE"| translate}}</label>
+                                <input ng-model="vm.item.score" type="number" required/>
+                            </md-input-container>
+                        </md-list-item>
+
+                    </md-list>
+                </md-card>
+                <md-card>
+                    <md-list flex>
+
+                        <md-list-item >
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.STATUS">Status</label>
+                                <md-select ng-model="vm.item.status" required
+                                           class="md-no-underline">
+                                    <md-option value="Active">Active</md-option>
+                                    <md-option value="Inactive">Inactive</md-option>
+                                    <md-option value="Pending">Pending</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+
+                        <md-list-item >
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.TYPE">Type</label>
+                                <md-select ng-model="vm.item.type" required
+                                           class="md-no-underline">
+                                    <md-option value="NORMAL">NORMAL</md-option>
+                                    <md-option value="ONLINE">ONLINE</md-option>
+                                    <md-option value="FREELANCER">FREELANCER</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item>
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.TYPE_DESCRIPTION">Description</label>
+                                <!--<md-icon>description</md-icon>-->
+                                <md-select ng-model='vm.item.type_description'>
+                                     <md-option value=""><em>None</em></md-option>
+                                    <md-option value="{{'Individual Freelancer'}}" ng-selected="vm.item.type_description === 'Individual Freelancer'">Individual Freelancer</md-option>
+                                    <md-option value="{{'Product Brand'}}" ng-selected="vm.item.type_description === 'Product Brand'">Product Brand</md-option>
+                                    <md-option value="{{'Registered online business'}}" ng-selected="vm.item.type_description === 'Registered online business'">Registered online business</md-option>
+                                    <md-option value="{{'Business with physical shop'}}" ng-selected="vm.item.type_description === 'Business with physical shop'">Business with physical shop</md-option>
+                                </md-select>
+
+
+                                <!--<textarea rows="3"  ng-model="vm.item.type_description" type="text"></textarea>-->
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item flex layout="row" layout-align="space-between">
+                            <md-switch ng-model="vm.item.is_licensed" aria-label=""
+                                       ng-true-value="'yes'" ng-false-value="'no'">
+                                {{"BUSINESSES.IS_LICENSED"| translate}}
+
+                            </md-switch>
+
+                        </md-list-item>
+                        <md-list-item ng-show="vm.item.is_licensed === 'yes'"  >
+                            <div layout="column" layout-align="center end">
+                                <img  ngf-thumbnail="vm.item.license_image" class="" alt="license image">
+                                <div layout="row"  layout-align="center center">
+                                    <div class="fileUpload">
+                                        <md-button
+                                            ng-required="vm.item.is_licensed=='yes'"
+                                            class="md-icon-button"
+                                            ngf-select
+                                            ng-model="vm.item.license_image"
+                                            name="file"
+                                            ngf-pattern="'image/*,application/pdf'"
+                                            ngf-accept="'image/*'"
+                                            ngf-resize="{ratio:'6:4',quality: .9,centerCrop: true}">
+                                            <md-icon class="material-icons "> description</md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div class="fileUpload">
+                                        <md-button ng-click="vm.item.license_image = null;
+                                            vm.item.license_image = ''" class="md-icon-button" >
+                                            <md-icon class="material-icons "> clear</md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-list-item>
+                        <!--                    <md-list-item ng-show="vm.item.is_licensed === 'yes'"  >
+                                                <div layout="column" flex>
+                                                    <img layout="row" ngf-thumbnail="vm.item.license_image" class="" alt="business">
+                                                    <div layout="row"  layout-align="center center">
+                                                        <div class="fileUpload">
+                                                            <md-button
+                                                                ng-required="vm.item.is_licensed=='yes'"
+                                                                class="md-icon-button"
+                                                                ngf-select
+                                                                ng-model="vm.item.license_image"
+                                                                name="file2"
+                                                                ngf-pattern="'image/*,application/pdf'"
+                                                                ngf-accept="'image/*'"
+                                                                ngf-resize="{ratio:'6:4',quality: .9,centerCrop: true}">
+                                                                <md-icon class="material-icons "> description</md-icon>
+                                                            </md-button>
+                                                        </div>
+                                                        <div class="fileUpload">
+                                                            <md-button ng-click="vm.item.license_image = null;
+                                                                vm.item.license_image = ''" class="md-icon-button" >
+                                                                <md-icon class="material-icons "> clear</md-icon>
+                                                            </md-button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-list-item>-->
+                    </md-list>
+                </md-card>
+            </div>
+            <div layout="column" flex="50">
+                <md-card>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.INDUSTRY">INDUSTRY</label>
+                                <md-icon>menu</md-icon>
+                                <md-select ng-model="vm.item.industry" required
+                                           ng-model-options="{trackBy: '$value.id'}">
+                                    <md-option ng-value="c"
+                                               ng-repeat="c in vm.industries">{{c.name}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.CITY">CITY</label>
+                                <md-icon>location_on</md-icon>
+                                <md-select ng-model="vm.item.city"
+                                           ng-model-options="{trackBy: '$value.id'}">
+                                     <md-option value=""><em>None</em></md-option>
+                                    <md-option ng-value="c"
+                                               ng-repeat="c in vm.cities">{{c.name}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>business</md-icon>
+                                <label>{{"BUSINESSES.COMMERCIAL_NAME"| translate}}</label>
+                                <input ng-model="vm.item.commercial_name" type="text" >
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>business</md-icon>
+                                <label>{{"BUSINESSES.LEGAL_NAME"| translate}}</label>
+                                <input ng-model="vm.item.legal_name" type="text" >
+                            </md-input-container>
+                        </md-list-item>
+
+<!--                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>location_on</md-icon>
+                                <label>{{"BUSINESSES.COUNTRY"| translate}}</label>
+                                <input ng-model="vm.item.country" type="text" >
+                            </md-input-container>
+                        </md-list-item>-->
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>location_on</md-icon>
+                                <label>{{"BUSINESSES.ADDRESS"| translate}}</label>
+                                <input ng-model="vm.item.address" type="text" >
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>phone</md-icon>
+                                <label>{{"BUSINESSES.PHONE"| translate}}</label>
+                                <input ng-model="vm.item.phone" type="text"
+                                       id="phonenumber"
+                                       format-phone>
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>account_box</md-icon>
+                                <label>{{"BUSINESSES.MANAGER_NAME"| translate}}</label>
+                                <input ng-model="vm.item.manager_name" type="text">
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>phone</md-icon>
+                                <label>{{"BUSINESSES.MANAGER_PHONE"| translate}}</label>
+                                <input ng-model="vm.item.manager_phone" type="text"
+                                       id="phonenumber"
+                                       format-phone>
+                            </md-input-container>
+
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-input-container>
+                                <md-icon>web</md-icon>
+                                <label>{{"BUSINESSES.WEBSITE"| translate}}</label>
+                                <input ng-model="vm.item.website" type="text">
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item>
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="BUSINESSES.DESCRIPTION">Description</label>
+                                <md-icon>description</md-icon>
+                                <textarea rows="3"  ng-model="vm.item.description" type="text"></textarea>
+                            </md-input-container>
+                        </md-list-item>
+
+                    </md-list>
+                </md-card>
+            </div>
+        </div>
+    </md-content>
+</div>

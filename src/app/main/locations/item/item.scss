@@ -1,0 +1,18 @@
+.feeling {
+
+    > .header {
+        height: 50px;
+        min-height: 50px;
+        max-height: 120px;
+
+        .goto-orders-button {
+            margin-right: 16px;
+        }
+
+    }    
+    .order-detail-form-container {
+        padding: 24px;
+    }
+
+
+}

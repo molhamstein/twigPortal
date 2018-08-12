@@ -1,0 +1,34 @@
+{
+    "CATEGORIES": {
+        "EDIT_ITEM":"Edit Category",
+        "ITEMS": "CATEGORIES",
+        "ITEM": "Category",
+        "SEARCH": "Search",
+        "BACK": "Back",        
+        "SELECT_ALL": "Select all",
+        "SELECT_NONE": "Select none",
+        "SELECTED": "selected",
+        "DELETE_SELECTED": "Delete selected",
+        "ALL_ITEMS": "Total categories",     
+        "MORE": "More",
+        "DELETE_ITEM": "Delete category",
+        "DELETE": "DELETE",
+        "SAVE": "SAVE",
+        "ADD_ITEM": "Add category",
+        "NO_RESULTS": "No results..",                        
+        "SEARCH_FOR_ANYONE": "Search for anyone",        
+        "MULTI_SELECT_TOGGLE": "multi select toggle",
+        "SELECT_ALL": "Select all",
+        "SELECT_NONE": "Select none",
+        "SELECTED": "selected",
+        "DELETE_SELECTED": "Delete selected",             
+        "DELETE": "DELETE",
+        "SAVE": "SAVE", 
+        "NAME":"Name",
+        "COLOR":"Color",
+        "STATUS":"Status",
+        "PHOTO":"Photo",
+        "COVER":"Cover"       
+    }
+
+}

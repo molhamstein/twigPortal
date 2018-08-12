@@ -1,0 +1,173 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex> 
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.orders"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+                <div class="h2">                  
+                    <span translate="{{translate + 'EDIT_ITEM'}}">Add Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span translate="{{translate + 'SAVE'}}">Save</span>
+            </md-button>
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="row"  flex>       
+        <md-card flex="50">
+            <md-list flex>
+                <md-list-item class="md-2-line"> 
+                    <md-icon class="no-margin-icon">account_box</md-icon>              
+                    <md-autocomplete                  flex  
+                                                      required
+                                                      md-delay="2000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedUser"
+                                                      md-search-text-change="searchUserChange(searchUser)"
+                                                      md-search-text="searchUser"
+                                                      md-selected-item-change="selectedItemChange(i,'users','user')"
+                                                      md-items="i in querySearch(searchUser, 'users')"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-require-match
+                                                      md-floating-label="{{'ORDERS.USER'| translate}}">                                
+                        <md-item-template>                                    
+                            <span md-highlight-text="searchUser" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                        <!--                        <md-not-found>
+                                                    No users matching {{searchUser}} were found.
+                                                </md-not-found>-->
+                    </md-autocomplete>   
+                </md-list-item>
+                <md-list-item class="md-2-line"> 
+                    <md-icon class="no-margin-icon">account_box</md-icon>              
+                    <md-autocomplete                  flex  
+                                                      required
+                                                      md-delay="2000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedToUser"                                                    
+                                                      md-search-text="searchToUser"
+                                                      md-selected-item-change="selectedItemChange(i,'users','touser')"
+                                                      md-items="i in querySearch(searchToUser,'users')"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-require-match
+                                                      md-floating-label="{{'ORDERS.TOUSER'| translate}}">                                
+                        <md-item-template>                                    
+                            <span md-highlight-text="searchToUser" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                        <!--                        <md-not-found>
+                                                    No users matching {{searchToUser}} were found.
+                                                </md-not-found>-->
+                    </md-autocomplete>   
+                </md-list-item>
+
+                <md-list-item>
+                    <!--<md-input-container class="md-icon-float md-block">-->
+                    <md-icon class="no-margin-icon">public</md-icon>              
+                    <md-autocomplete                  flex  
+                                                      required
+                                                      md-delay="2000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedDeliveryZone"                                                    
+                                                      md-search-text="searchDeliveryZone"
+                                                      md-selected-item-change="selectedItemChange(i,'delivery')"
+                                                      md-items="i in querySearch(searchDeliveryZone, 'delivery')"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-require-match
+                                                      md-floating-label="{{'ORDERS.DELIVERY_ZONE'| translate}}">                                
+                        <md-item-template>                                    
+                            <span md-highlight-text="searchDeliveryZone" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                        <!--                        <md-not-found>
+                                                    No users matching {{searchToUser}} were found.
+                                                </md-not-found>-->
+                    </md-autocomplete>   
+
+
+                    <!--                        <md-icon>public</md-icon> 
+                                            <label translate="ORDERS.DELIVERY_ZONE">Delivery Zone</label>
+                                            <md-select ng-model="vm.item.delivery_zone_id" required >                           
+                                                <md-option ng-value="{{pr.id}}" ng-repeat='pr in vm.dZones'>{{pr.name}}</md-option>                                                  
+                                            </md-select>-->
+                    <!--</md-input-container>-->
+                </md-list-item>
+                <md-list-item class="md-2-line" flex >
+                    <md-input-container class="md-icon-float md-block">
+                        <md-icon>public</md-icon> 
+                        <label translate="ORDERS.DELIVERY_ADDRESS">Delivery Zone</label>
+                        <input ng-model="vm.item.delivery_address" required type='text'>                                                      
+                    </md-input-container>
+                </md-list-item> 
+            </md-list>
+        </md-card>
+        <md-card flex='50'>
+            <md-list flex>
+                <md-list-item>
+                    <!--<md-input-container class="md-icon-float md-block">-->
+                         <md-icon class="no-margin-icon">shopping_basket</md-icon>              
+                    <md-autocomplete                  flex  
+                                                      required
+                                                      md-delay="2000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedProduct"                                                    
+                                                      md-search-text="searchProduct"
+                                                      md-selected-item-change="selectedItemChange(i,'products')"
+                                                      md-items="i in querySearch(searchProduct,'products')"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-require-match
+                                                      md-floating-label="{{'ORDERS.PRODUCT'| translate}}">                                
+                        <md-item-template>                                    
+                            <span md-highlight-text="searchProduct" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                    </md-autocomplete>
+                        
+<!--                        <md-icon>shopping_basket</md-icon> 
+                        <label translate="ORDERS.PRODUCT">Product</label>
+                        <md-select ng-model="vm.item.product_id" required >                           
+                            <md-option ng-value="{{pr.id}}" ng-repeat='pr in vm.products'>{{pr.name}}</md-option>                                                  
+                        </md-select>
+                    </md-input-container>-->
+                </md-list-item>
+                <md-list-item class="md-2-line">  
+                    <md-input-container class="md-icon-float md-block">
+                        <md-icon>phone</md-icon> 
+                        <label>{{"ORDERS.PHONE"| translate}}</label>
+                        <input ng-model="vm.item.phone_number" type="text" required
+                               id="phonenumber"                        
+                               format-phone>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item class="md-2-line" flex >
+                    <md-input-container class="md-icon-float md-block">
+                        <md-icon>clear_all</md-icon> 
+                        <label translate="ORDERS.QUANTITY">quantity</label>
+                        <input ng-model="vm.item.quantity" required type='number' min='1'>                                                      
+                    </md-input-container>
+                </md-list-item> 
+
+                <md-list-item class="md-2-line" flex >
+                    <md-input-container class="md-icon-float md-block">
+                        <md-icon>description</md-icon> 
+                        <label translate="ORDERS.NOTES">Notes</label>
+                        <textarea ng-model="vm.item.notes"  type='text' ></textarea>                                                      
+                    </md-input-container>
+                </md-list-item>  
+
+            </md-list>
+        </md-card>   
+
+    </md-content>
+</div>

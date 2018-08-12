@@ -1,0 +1,116 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.categories"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <!--<div layout="column" layout-align="start start">-->
+
+            <div class="h2">                  
+                <span translate="{{translate + 'EDIT_ITEM'}}">Add Item</span>
+            </div>
+            <!--</div>-->
+        </div>
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span>{{translate + 'SAVE'| translate}}</span>
+            </md-button>           
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="row" layout-align="center center">
+        <md-card  md-theme-watch flex>
+            <img  ngf-thumbnail="file2 || defaultBackground" class="cover md-card-image" alt="avatar">
+            <div  layout="row" layout-align="center end">                            
+                <div class="fileUpload">                                                                      
+                    <md-button 
+                        class="md-icon-button" 
+                        ngf-select                       
+                        ng-model="file2"
+                        name="file2"                                         
+                        ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'"
+                         ngf-resize="{ quality: .9,ratio: '4:2', centerCrop: true}">
+                        <!--                         ngf-max-size="20MB" 
+                                                ngf-min-height="100"-->
+                        <md-icon class="material-icons "> photo_camera</md-icon>
+                    </md-button>    
+                </div>
+                <div class="fileUpload">
+                    <md-button ng-click="file2 = '';
+                        file2 = null"  class="md-icon-button" >
+                        <md-icon class="material-icons "> clear</md-icon>
+                    </md-button>
+                </div>
+            </div>                          
+
+            <md-card-title layout="row" layout-align="space-between center">
+                <md-card-title-text flex="60">
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-input-container class="md-icon-float md-block">
+                                <label translate="CATEGORIES.NAME">Name</label>
+                                <md-icon>account_circle</md-icon>    
+                                <input ng-model="vm.item.name" type="text" required>
+                            </md-input-container>                                                                  
+                        </md-list-item>
+                    </md-list>
+
+                    <md-list layout='row' layout-align="space-between">
+                        <md-list-item class="md-2-line color-picker" flex>
+                            <div
+                                md-color-picker
+                                ng-model="vm.item.color"
+                                label="Color"
+                                icon="brush"
+                                default="#f00"
+                                md-color-generic-palette="false"
+                                md-color-history="false">                                    
+                            </div>
+                        </md-list-item>      
+                        <md-list-item class="md-secondary" flex>
+                            <p> Active</p>
+                            <md-checkbox ng-model="status" aria-label="Checkbox 1">
+                                <!--<span translate='CATEGORIES.STATUS'>Status</span>-->
+                               
+                            </md-checkbox>
+                        </md-list-item>
+                    </md-list>                                      
+                </md-card-title-text>
+                <md-card-title-media>
+                    <div >                      
+                        <div  layout="row" layout-align="center center">
+                            <div class="md-media-lg card-media">
+                                <img  ngf-thumbnail="file1 || defaultBackground" alt="user-avatar"> </div>
+                            <div>
+                                <div class="fileUpload">                                                                      
+                                    <md-button 
+                                        class="md-icon-button" 
+                                        ngf-select
+                                        ng-model="file1"
+                                        name="file"                                         
+                                        ngf-pattern="'image/*'"
+                                        ngf-accept="'image/*'"
+                                        ngf-resize="{ratio:'3:3',quality: .9,centerCrop: true}">
+                                        <md-icon class="material-icons "> photo_camera</md-icon>
+                                    </md-button>    
+                                </div>
+                                <div class="fileUpload">
+                                    <md-button ng-click="file1 = '';
+                                        file1 = null"  class="md-icon-button" >
+                                        <md-icon class="material-icons "> clear</md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>                         
+                    </div>
+                </md-card-title-media>
+            </md-card-title>     
+        </md-card>
+    </md-content>   
+</div>

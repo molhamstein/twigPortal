@@ -1,0 +1,89 @@
+.add-item {
+
+    > .header {
+        height: 50px;
+        min-height: 50px;
+        max-height: 120px;
+
+        .goto-orders-button {
+            margin-right: 16px;
+        }
+
+    }
+    md-card{
+        md-input-container{
+            width: 100%
+        }
+
+        .progress {
+            line-height: 7px;
+            display: inline-block;
+            width: 100%;
+            border: 1px groove #CCC;
+            div {
+                font-size: smaller;
+                background: purple;
+                width: 0;
+            }
+        }
+
+        .cover{
+            height:300px;
+        }
+        .avatar-img{
+            /*            width: 100%;
+                        height: 100%;
+                        object-fit: contain;*/
+        }
+        .color-picker{
+            margin-top: 30px;
+        }
+        .fileUpload {
+            position: relative;
+            right: 10px;
+            overflow: hidden;
+            /*margin: 10px;*/
+            min-width: 40px !important;
+
+            input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                height: 100%;
+                padding: 0;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+        }
+        md-list{
+            .locations-chips{
+                margin-bottom: 35px;
+                md-contact-chips{
+                    md-chips{
+                        md-chips-wrap{
+                            md-autocomplete{
+                                input{
+                                    font-size: 13px;
+                                    padding: 0 !important;
+                                    margin-bottom: -3px !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            md-list-item{
+                .no-margin-icon{
+                    margin-right: 12px !important;
+                }
+            }
+        }
+
+
+    }
+
+}

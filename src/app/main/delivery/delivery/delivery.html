@@ -1,0 +1,77 @@
+<div class="twig add-item page-layout  tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg " layout="row" layout-align="space-between center" flex>
+            <div class="white-fg" layout="row" layout-align="start center" flex>
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.delivery"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-raised md-background "
+                           ui-sref="app.delivery.add-delivery"
+                           aria-label="add item" translate translate-attr-aria-label="DELIVERY.ADD_ITEM">
+                    {{"DELIVERY.ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="DELIVERY.EDIT_ITEM">
+                    {{"DELIVERY.EDIT_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="DELIVERY.DELETE_ITEM">
+                    {{"DELIVERY.DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <md-content class="md-padding"  flex>
+            <md-card md-theme-watch flex layout="row">
+                <md-list flex="50">
+                    <md-list-item class="md-2-line">
+                        <md-icon>public</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{vm.item.name}}</h3>
+                            <p translate="DELIVERY.NAME">Name</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon>attach_money</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{vm.item.cost}}</h3>
+                            <p translate="DELIVERY.COST">cost</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <md-list flex="50">
+                    <md-list-item class="md-2-line" ng-if="vm.item.location">
+                        <md-icon>location_on</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{vm.item.location.name}}</h3>
+                            <p translate="DELIVERY.LOCATION">location</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" ng-if="!vm.item.location && vm.item.business">
+                        <md-icon>business</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{vm.item.business.name}}</h3>
+                            <p translate="DELIVERY.BUSINESS">business</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card>
+    </md-content>
+</div>

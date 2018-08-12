@@ -1,0 +1,12 @@
+<md-toolbar class="navigation-header md-whiteframe-1dp" layout="row" layout-align="space-between center">
+    <div class="logo" layout="row" layout-align="start center">
+        <!--<span class="logo-image">F</span>-->
+        <img src="../../../../assets/images/logos/logo.png" alt=""/>
+        <!--<span class="logo-text">TwigBig</span>-->
+    </div>
+
+    <md-icon class="fold-toggle s18"  hide show-gt-sm
+             ng-click="vm.toggleMsNavigationFolded()">keyboard_arrow_left</md-icon>
+</md-toolbar>
+
+<ms-navigation class="scrollable" folded="vm.folded" ms-scroll="vm.msScrollOptions"></ms-navigation>

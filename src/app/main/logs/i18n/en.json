@@ -1,0 +1,28 @@
+{
+    "LOGS": {
+        "ITEMS": "LOGS",
+        "ITEM": "Tag",
+        "SEARCH": "Search",
+        "BACK": "Back",
+        "SELECT_ALL": "Select all",
+        "SELECT_NONE": "Select none",
+        "SELECTED": "selected",
+        "DELETE_SELECTED": "Delete selected",
+        "ALL_ITEMS": "Total logs",
+        "MORE": "More",
+        "DELETE_ITEM": "Delete Tag",
+        "DELETE": "DELETE",
+        "SAVE": "SAVE",
+        "ADD_ITEM": "Add Tag",
+        "EDIT_ITEM":"Edit Tag",
+        "NO_RESULTS": "No results..",
+        "NAME_REQUIRED": "Name (required)",       
+        "ID": "ID",       
+        "NAME": "Name",
+        "IS_FEATURED":"IS Featured",
+        "WEIGHT":"Weight",
+        "SEARCH_FOR_ANYONE": "Search for anyone",       
+        "GO_TO_ITEMS": "Go to tags",
+        "ITEM_DETAILS": "Tag details"        
+    }
+}

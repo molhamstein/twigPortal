@@ -1,0 +1,92 @@
+<div id="login" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="login-form-wrapper" layout="column" layout-align="center center">
+        <div id="login-form" class="md-whiteframe-8dp">
+            <img src="../../../../assets/images/logos/logo2.png" alt=""/>
+<!--            <div class="logo md-accent-bg">
+                <span>F</span>
+            </div>-->
+
+            <div class="title" translate="LOGIN.TITLE">Log in to your account</div>
+            <!--<div ng-show="vm.error" class="error-msg md-whiteframe-5dp">Error email or password</div>-->
+<!--<form name="form" ng-submit="vm.login()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-click="vm.logIn()" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a  ui-sref="app.pages_auth_register" class="btn btn-link">Register</a>
+        </div>
+    </form>-->
+            <form name="form" ng-submit="vm.login()" role="form">   
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="email" ng-model="vm.email" placeholder="Email"
+                           translate translate-attr-placeholder="REGISTER.EMAIL"
+                           ng-pattern="/^.+@.+\..+$/" required>
+                    <div ng-messages="form.email.$error" role="alert" multiple>
+                        <div ng-message="required">
+                            <span translate="REGISTER.ERRORS.EMAIL_REQUIRED">Email field is required</span>
+                        </div>
+                        <div ng-message="pattern">
+                            <span translate="REGISTER.ERRORS.EMAIL_MUST_VALID">Email must be a valid e-mail address</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                
+<!--                <md-input-container class="md-block" md-no-float>
+                    <input  type="text" name="username" id="username" class="form-control" ng-model="vm.username" required
+                            placeholder="User name"
+                           translate translate-attr-placeholder="LOGIN.USERNAME"
+                            required>
+                    <div ng-messages="form.username.$error" role="alert" multiple>
+                        <div ng-message="required">
+                            <span translate="LOGIN.ERRORS.EMAIL_REQUIRED">Email field is required</span>
+                        </div>                        
+                    </div>
+                </md-input-container>-->
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="password" id="password"
+                           ng-model="vm.password"
+                           placeholder="Password"
+                           translate translate-attr-placeholder="LOGIN.PASSWORD"
+                           required minlength="6">
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                        <div ng-message="required">
+                            <span translate="LOGIN.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <div class="remember-forgot-password" layout="row" layout-xs="column"
+                     layout-align="space-between center">
+<!--                    <md-checkbox class="remember-me" ng-model="data.cb1" aria-label="Remember Me">
+                        <span translate="LOGIN.REMEMBER_ME">Remember Me</span>
+                    </md-checkbox>-->
+
+                    <a ng-click="vm.forgotPassword()" class="forgot-password md-accent-color"
+                       translate="LOGIN.FORGOT_PASSWORD">Forgot Password?</a>
+                </div>
+
+                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
+                           ng-disabled="form.$invalid || form.$pristine"
+                           ng-click="vm.logIn()"
+                           translate="LOGIN.LOG_IN" translate-attr-aria-label="LOGIN.LOG_IN">
+                    LOG IN
+                </md-button>
+            </form>
+
+            <div class="register" layout="row" layout-sm="column" layout-align="center center">
+                <span class="text" translate="LOGIN.DONT_HAVE_ACCOUNT">Don't have an account?</span>
+                <a class="link" ng-click="vm.register()" translate="LOGIN.CREATE_ACCOUNT">Create an account</a>
+            </div>
+        </div>
+    </div>
+</div>

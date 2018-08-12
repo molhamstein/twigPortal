@@ -1,0 +1,267 @@
+<div class="twig add-item page-layout  tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg " layout="row" layout-align="space-between center" flex>
+            <div class="white-fg" layout="row" layout-align="start center" flex>
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.businesses"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-raised md-background "
+                           ui-sref="app.businesses.add-business"
+                           aria-label="add item" translate translate-attr-aria-label="BUSINESSES.ADD_ITEM">
+                    {{"BUSINESSES.ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="BUSINESSES.EDIT_ITEM">
+                    {{"BUSINESSES.EDIT_ITEM"| translate}}
+                </md-button>
+<!--                <md-button class="md-raised md-background "
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="BUSINESSES.DELETE_ITEM">
+                    {{"BUSINESSES.DELETE_ITEM"| translate}}
+                </md-button>-->
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row">
+            <md-card md-theme-watch flex="50">
+                <md-card-title>
+                    <md-card-title-text>
+                        <md-list>
+                            <md-list-item class="md-2-line">
+                                <md-icon>business</md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{vm.item.name}}</h3>
+                                    <p translate="BUSINESSES.NAME">Name</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon>account_circle</md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{vm.item.user.name}}</h3>
+                                    <p translate="BUSINESSES.USER">User</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                        <!--                        <span class="md-headline">Card with image</span>
+                                                <span class="md-subhead">Large</span>-->
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img  src="{{vm.item.logo||  defaultBackground}}" class="md-card-image" alt="business">
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-content>
+                    <md-list>
+
+                        <!--                         <md-list-item class="md-2-line">
+                                                    <md-icon>location_on</md-icon>
+                                                    <div class="md-list-item-text">
+                                                        <h3>{{vm.item.location.name}}</h3>
+                                                        <p translate="BUSINESSES.LOCATION">Location</p>
+                                                    </div>
+                                                </md-list-item>-->
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>
+                            <md-chips ng-model="vm.item.locations" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <p translate="BUSINESSES.LOCATIONS">Location</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.country_obj.short_name}}</h3>
+                                <p translate="BUSINESSES.COUNTRY">Country</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>
+                            <md-chips ng-model="vm.item.categories" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3 ng-repeat="p in vm.item.tags">{{p.name}}</h3>-->
+                                <p translate="BUSINESSES.CATEGORIES">categories</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>
+                            <md-chips ng-model="vm.item.products" readonly="true">
+                                <md-chip-template>
+                                    <strong>{{$chip.name}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                            <div class="md-list-item-text">
+                                <!--<h3 ng-repeat="p in vm.item.tags">{{p.name}}</h3>-->
+                                <p translate="BUSINESSES.PRODUCTS">products</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>attach_money</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.score}}</h3>
+                                <p translate="BUSINESSES.SCORE">User</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+
+                    <md-list>
+                      <md-list-item class="md-2-line">
+                          <!-- <md-icon>info</md-icon> -->
+                          <div class="md-list-item-text">
+                              <h3>{{vm.item.status}}</h3>
+                              <p translate="BUSINESSES.STATUS">Status</p>
+                          </div>
+                      </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<md-icon>attach_money</md-icon>-->
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.type}}</h3>
+                                <p translate="BUSINESSES.TYPE">Type</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <!--<md-icon>description</md-icon>-->
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.type_description}}</h3>
+                                <p translate="BUSINESSES.TYPE_DESCRIPTION">Type escription</p>
+                            </div>
+                        </md-list-item>
+
+                    </md-list>
+                    <md-list layout='column' flex>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<md-icon>attach_money</md-icon>-->
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.is_licensed}}</h3>
+                                <p translate="BUSINESSES.IS_LICENSED">Is licensed</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex ng-if="vm.item.is_licensed === 'yes'" >
+                            <img  src="{{vm.item.license_image}}"  alt="business image">
+                        </md-list-item>
+
+                    </md-list>
+                </md-card-content>
+            </md-card>
+            <md-card md-theme-watch flex="50">
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-icon>menu</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.industry.name}}</h3>
+                                <p translate="BUSINESSES.INDUSTRY">Industry</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.city.name}}</h3>
+                                <p translate="BUSINESSES.CITY">City</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>business</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.commercial_name}}</h3>
+                                <p translate="BUSINESSES.COMMERCIAL_NAME">Commercial Name</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>business</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.legal_name}}</h3>
+                                <p translate="BUSINESSES.LEGAL_NAME">Legal Name</p>
+                            </div>
+                        </md-list-item>
+
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.country}}</h3>
+                                <p translate="BUSINESSES.COUNTRY">Country</p>
+                            </div>
+                        </md-list-item>
+
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.address}}</h3>
+                                <p translate="BUSINESSES.ADDRESS">Address</p>
+                            </div>
+                        </md-list-item>
+
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>phone</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.phone}}</h3>
+                                <p translate="BUSINESSES.PHONE">Phone</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>business</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.manager_name}}</h3>
+                                <p translate="BUSINESSES.MANAGER_NAME">Manager Name</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>phone</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.manager_phone}}</h3>
+                                <p translate="BUSINESSES.MANAGER_PHONE">Manager Phone</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>web</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.website}}</h3>
+                                <p translate="BUSINESSES.WEBSITE">Website</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line" flex >
+                            <!--<label translate="TWIGS.IS_EXCEPTIONAL">Is Exceptional</label>-->
+                            <md-icon>description</md-icon>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.description}}</h3>
+                                <p translate="BUSINESSES.DESCRIPTION">Description</p>
+                            </div>
+                        </md-list-item>
+
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+
+    </md-content>
+</div>

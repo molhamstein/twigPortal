@@ -1,0 +1,200 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.users"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <!--<div layout="column" layout-align="start start">-->               
+                <div class="h2">                  
+                    <span translate="{{translate + 'EDIT_ITEM'}}">Edit Item</span>
+                </div>
+            <!--</div>-->
+        </div>
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       >
+                <span>{{translate + 'SAVE'|translate}}</span>
+            </md-button>
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="row" >
+        <md-card  md-theme-watch flex>
+             <img  ngf-thumbnail="file2 || defaultBackground" class="cover md-card-image" alt="avatar">
+            <div  layout="row" layout-align="center end">                            
+                <div class="fileUpload">                                                                      
+                    <md-button 
+                        class="md-icon-button" 
+                        ngf-select                       
+                        ng-model="file2"
+                        name="file2"                                         
+                        ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'"
+                        ngf-resize="{ quality: .9,ratio: '4:2', centerCrop: true}"
+                         >
+                       <!--  ngf-min-height="100"-->
+                        <md-icon class="material-icons "> photo_camera</md-icon>
+                    </md-button>    
+                </div>
+                <div class="fileUpload">
+                    <md-button ng-click="file2 = ''"  class="md-icon-button" >
+                        <md-icon class="material-icons "> clear</md-icon>
+                    </md-button>
+                </div>
+            </div>                          
+            <md-card-title layout="row" layout-align="space-between center">  
+                <md-card-title-text flex="60">
+                    <md-input-container class="md-block">
+                        <label translate="{{translate + 'NAME'}}">name</label>
+                        <md-icon>account_circle</md-icon>
+                        <input ng-model="vm.item.name" 
+                               type="text"
+                               required autofocus>
+                    </md-input-container>  
+
+                    <md-input-container class="md-icon-float md-block">
+                        <label translate="{{translate + 'PASSWORD'}}">Password</label>
+                        <md-icon>create</md-icon>
+                        <input ng-model="vm.item.password" 
+                               type="password"                             
+                               minlength="6">
+                    </md-input-container> 
+                     <md-input-container>
+                            <label translate="USERS.POSITION">POSITION</label>
+                            <md-icon>account_box</md-icon>                                                          
+                            <md-select ng-model='vm.item.position'>
+                                <!--<md-option ng-repeat="c in vm.countries" ng-value="c">{{c}}</md-option>-->
+                                <md-option ng-selected="vm.item.position==='BeginnerTwigger'" value="{{'BeginnerTwigger'}}">Beginner Twigger</md-option>
+                                <md-option>pos 2</md-option>
+                            </md-select>                           
+                        </md-input-container>  
+                      <md-input-container>
+                            <label translate="USERS.SCORE">Score</label>
+                            <md-icon>account_box</md-icon>                                                          
+                           <input ng-model='vm.item.score' type='number' min='0'/>            
+                        </md-input-container>  
+                      <md-input-container>
+                            <label translate="USERS.STATUS">Status</label>
+                            <md-icon>account_box</md-icon>             
+                          
+                            <md-select ng-model='vm.item.status'>
+                                <!--<md-option ng-repeat="c in vm.countries" ng-value="c">{{c}}</md-option>-->
+                                <md-option value="{{'Active'}}" ng-selected="vm.item.status==='Active'">Active</md-option>
+                                <md-option value="{{'Inactive'}}" ng-selected="vm.item.status==='Inactive'">Inactive</md-option>
+                            </md-select>                           
+                        </md-input-container>  
+                      <md-input-container>
+                            <label translate="USERS.TYPE">Type</label>
+                            <md-icon>account_box</md-icon>                             
+                            <md-select ng-model='vm.item.type'>
+                                <!--<md-option ng-repeat="c in vm.countries" ng-value="c">{{c}}</md-option>-->
+                                <md-option value="{{'Admin'}}" ng-selected="vm.item.type==='Admin'">Admin</md-option>
+                                <md-option value="{{'User'}}"  ng-selected="vm.item.type==='User'">User</md-option>
+                                <md-option value="{{'Business'}}"  ng-selected="vm.item.type==='Business'">Business</md-option>
+                            </md-select>                           
+                        </md-input-container>  
+<!--                     <md-input-container>
+                            <label translate="USERS.COUNTRY">Country</label>
+                            <md-icon>location_on</md-icon>                                                          
+                            <md-select ng-model='vm.item.country_id'>
+                                <md-option ng-repeat="c in vm.countries" ng-value="c">{{c}}</md-option>
+                            </md-select>                           
+                        </md-input-container>  
+                     <md-input-container>
+                            <label translate="USERS.LANGUAGE">Language</label>
+                            <md-icon>language</md-icon>                                                          
+                            <md-select ng-model='vm.item.language_id'>
+                                <md-option ng-repeat="c in vm.languages" ng-value="c">{{c}}</md-option>
+                            </md-select>                           
+                        </md-input-container>   -->
+                </md-card-title-text>            
+                <md-card-title-media>
+                     <div >                      
+                        <div  layout="row" layout-align="center end">
+                            <div class="md-media-lg card-media"><img  ngf-thumbnail="file1 || defaultAvatar" alt="user-avatar"></div>
+                            <div>
+                                <div class="fileUpload">                                                                      
+                                    <md-button 
+                                        class="md-icon-button" 
+                                        ngf-select
+                                        ng-model="file1"
+                                        name="file"                                         
+                                        ngf-pattern="'image/*'"
+                                        ngf-accept="'image/*'"
+                                        ngf-resize="{ratio:'3:3',quality: .9,centerCrop: true}" >
+                                        <md-icon class="material-icons "> photo_camera</md-icon>
+                                    </md-button>    
+                                </div>
+                                <div class="fileUpload">
+                                    <md-button ng-click="file1 = ''"
+                                               class="md-icon-button" >
+                                        <md-icon class="material-icons "> clear</md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>                         
+                    </div>
+                </md-card-title-media>
+            </md-card-title>                           
+        </md-card>
+<!--        <md-card  md-theme-watch flex>
+            <md-card-content>              
+                <md-list >                                                                                                                       
+                                            <md-list-item class="md-2-line">
+                                                <md-input-container>
+                                                    <label translate="USERS.CURRENCY">Currency</label>
+                                                    <md-icon>attach_money</md-icon>                                                          
+                                                    <md-select ng-model='vm.item.currency_id'>
+                                                        <md-option ng-repeat="c in vm.currencies" ng-value="c">{{c}}</md-option>
+                                                    </md-select>                           
+                                                </md-input-container>                                         
+                                            </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-input-container>
+                            <label translate="USERS.COUNTRY">Country</label>
+                            <md-icon>location_on</md-icon>                                                          
+                            <md-select ng-model='vm.item.country_id'>
+                                <md-option ng-repeat="c in vm.countries" ng-value="c">{{c}}</md-option>
+                            </md-select>                           
+                        </md-input-container>                                         
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-input-container>
+                            <label translate="USERS.LANGUAGE">Language</label>
+                            <md-icon>language</md-icon>                                                          
+                            <md-select ng-model='vm.item.language_id'>
+                                <md-option ng-repeat="c in vm.languages" ng-value="c">{{c}}</md-option>
+                            </md-select>                           
+                        </md-input-container>                                         
+                    </md-list-item>
+                </md-list>
+                                <md-input-container class="md-icon-float md-block">
+                                    <md-icon>account_box</md-icon>
+                                    <md-select flex
+                                               ng-model="vm.item.type"
+                                               placeholder="{{translate + 'TYPE'| translate}}" 
+                                               class="md-no-underline">
+                                        <md-option value="0">User</md-option>
+                                        <md-option value="1">Business</md-option>
+                                        <md-option value="2">Admin</md-option>
+                                    </md-select>                   
+                                </md-input-container>  
+                                <md-input-container class="md-icon-float md-block">
+                                    <md-icon>done</md-icon>
+                                    <md-select flex
+                                               ng-model="vm.item.status"
+                                               placeholder="{{translate + 'STATUS'| translate}}" 
+                                               class="md-no-underline">
+                                        <md-option value="0">Active</md-option>
+                                        <md-option value="1">InActive</md-option>                        
+                                    </md-select>                   
+                                </md-input-container>  
+            </md-card-content>
+        </md-card>-->
+    </md-content>
+</div>
+

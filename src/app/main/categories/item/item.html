@@ -1,0 +1,82 @@
+<div class="user page-layout add-item tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="space-between center" flex>         
+            <div layout="row">
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.categories"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <!--<div layout="column" layout-align="start start">-->
+                    <div class="h2">
+                        <!--<span translate="USERS.USER">User</span>-->
+                        <!--<span>{{vm.item.name}}</span>-->
+                    </div>
+                <!--</div>-->
+            </div>
+            <div>
+                <md-button class="md-raised md-background n" id="add-item-button"                      
+                           ui-sref="app.categories.add-category"
+                           aria-label="add item" translate translate-attr-aria-label="CATEGORIES.ADD_ITEM">
+                    {{"CATEGORIES.ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background " id="add-item-button"                                            
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="CATEGORIES.EDIT_ITEM">
+                    {{"CATEGORIES.EDIT_ITEM"| translate}}
+                </md-button>
+
+                <md-button class="md-raised md-background n" id="add-item-button"                      
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="CATEGORIES.ADD_ITEM">
+                    {{"CATEGORIES.DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row" flex>
+            <md-card flex>
+                <img src="{{vm.item.cover || defaultBackground}}" class="cover md-card-image" alt="avatar">
+                <md-card-title>  
+                    <md-card-title-text>
+                        <md-list>    
+                        <md-list-item class="md-2-line">
+                            <md-icon>account_circle</md-icon> 
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.name}}</h3>
+                                <p translate="CATEGORIES.NAME">Name</p>
+                            </div>   
+                        </md-list-item>                                   
+                        <md-list-item class="md-2-line">
+                            <md-icon ng-style="{'background-color':vm.item.color}">brightness1</md-icon>  
+                            <div class="md-list-item-text">
+                                <!--<h3>{{vm.item.color}}</h3>-->
+                                <p translate="CATEGORIES.COLOR">Color</p>
+                            </div>   
+                        </md-list-item>                                           
+                        <md-list-item class="md-2-line">
+                            <md-icon>done</md-icon> 
+                            <div class="md-list-item-text">
+                                <h3>{{vm.item.status}}</h3>
+                                <p translate="CATEGORIES.STATUS">Status</p>
+                            </div>   
+                        </md-list-item>   
+                    </md-list>          
+                    </md-card-title-text>
+                     <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img src="{{vm.item.photo || defaultBackground}}">                          
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+               
+            </md-card>
+        </div>
+    </md-content>
+</div>

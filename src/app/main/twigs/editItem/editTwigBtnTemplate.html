@@ -1,0 +1,127 @@
+<md-dialog aria-label="Twig Button" >
+
+    <form ng-cloak name="editBtn" ng-if="btn !== null">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{btn.title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label translate="TWIGS.BTN">Twig Button</label>
+                    <input ng-model="btn.title" type="text">
+                </md-input-container>
+                <md-input-container ng-if="btn.type === 'OPEN_URL'"   class="md-block">
+                    <label translate="TWIGS.BTN_ACTION">Twig  Action</label>
+                    <input ng-model="btn.action"  type="{{btn.inputType}}"   required>
+                </md-input-container>
+                <md-input-container ng-if="btn.type === 'CALL'" class="md-block">
+                    <label translate="TWIGS.BTN_ACTION">Twig  Action</label>
+                    <input ng-model="btn.action"  id="phonenumber"   type="text" ng-required="btn.type"  format-phone>
+                </md-input-container>
+                <md-input-container flex>
+                    <label translate="TWIGS.STATUS">Status</label>
+                    <md-select ng-model='btn.status' ng-required="btn.type">
+                        <md-option value="{{'Active'}}" ng-selected="btn.status === 'Active'">Active</md-option>
+                        <md-option value="{{'Inactive'}}" ng-selected="btn.status === 'Inactive'">Inactive</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <!--<h3 ng-if="editBtn.$valid && !editBtn.$pristine">Editing button request will be<br/> executed as soon as you save it</h3>-->
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button class="md-primary" ng-disabled="editBtn.$invalid || editBtn.$pristine" ng-click="answer(btn)">
+                Save
+            </md-button>
+            <md-button ng-click="answer('cancel')">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+
+    <form ng-cloak name="addBtn" ng-if="btn === null">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{newBtn.title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-select ng-model="newBtn.type"
+                           ng-change="switchType(newBtn)" placeholder="Button Type" class="md-no-underline">
+                    <md-option value="BUY">Buy</md-option>
+                    <md-option value="OPEN_URL">Open URL</md-option>
+                    <md-option value="CALL">Call</md-option>
+                    <!--<md-option value="ADD_TO_CART">Add To Cart</md-option>-->
+                    <md-option value="EXPRESS_INTEREST">Express Interest</md-option>
+                </md-select>
+                <md-input-container class="md-block">
+                    <label translate="TWIGS.BTN">Twig Button</label>
+                    <input ng-model="newBtn.title" type="text">
+                </md-input-container>
+                 <!-- <md-input-container ng-if="newBtn.type === 'BUY'"  class="md-block">
+                    <label translate="TWIGS.BTN_ACTION">Twig  Action</label>
+                    <input ng-model="newBtn.action"
+                           type="{{newBtn.inputType}}"
+                           required>
+                </md-input-container>  -->
+                <md-input-container ng-if="newBtn.type === 'OPEN_URL'"  class="md-block">
+                    <label translate="TWIGS.BTN_ACTION">Twig  Action</label>
+                    <input ng-model="newBtn.action"
+                           type="{{newBtn.inputType}}"
+                           required>
+                </md-input-container>
+                <md-input-container ng-if="newBtn.type === 'CALL'" class="md-block">
+                    <label translate="TWIGS.BTN_ACTION">Twig  Action</label>
+                    <input ng-model="newBtn.action"
+                           id="phonenumber"
+                           type="text"
+                           ng-required="newBtn.type"
+                           format-phone>
+                </md-input-container>
+                <md-input-container flex>
+                    <label translate="TWIGS.STATUS">Status</label>
+                    <md-select ng-model='newBtn.status' ng-required="newBtn.type">
+                        <md-option value="{{'Active'}}" ng-selected="newBtn.status === 'Active'">Active</md-option>
+                        <md-option value="{{'Inactive'}}" ng-selected="newBtn.status === 'Inactive'">Inactive</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <!--<h3 ng-if="addBtn.$valid && !addBtn.$pristine">Adding button request will be <br/>executed as soon as you save it</h3>-->
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <!--            <md-button md-autofocus>
+                            More on Wikipedia
+                        </md-button>-->
+<!--            <md-button class="md-raised" ng-if="vm.item.btns[0].type"
+                       ng-style="{'background-color':vm.item.btns[0].color}"  flex>
+                {{vm.item.btns[0].title}}
+                <md-icon>{{vm.item.btns[0].icon}}</md-icon>
+                <small>({{vm.item.btns[0].type}})</small>
+                <md-tooltip ng-if="vm.item.btns[0].action && vm.item.btns[0].action !== ''">{{vm.item.btns[0].action}}</md-tooltip>
+            </md-button>-->
+
+            <span flex></span>
+            <md-button ng-disabled="addBtn.$invalid || addBtn.$pristine"  ng-click="answer(newBtn)">
+                Save
+            </md-button>
+            <md-button ng-click="answer('cancel')">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,116 @@
+<div class="items page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div st-pipe="vm.callServer" st-table="displayed" class="center" layout="column" flex>
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon>location_on</md-icon>
+                    <span translate="LOCATIONS.ITEMS">Items</span>
+                </div>
+                <div class="order-count secondary-text">
+                    <span translate="LOCATIONS.ALL_ITEMS">Total Items: </span>
+                   <span>{{total_pages}}</span>
+                </div>
+            </div>
+
+             <div class="search" layout="row" layout-align="start center" flex>
+                <md-input-container flex>
+                     <md-icon class="white-text icon search-icon">search</md-icon>
+                    <label>{{'USERS.SEARCH'| translate}}</label>
+                    <input ng-model="searchKeyword" flex>
+                </md-input-container>            
+
+            </div>
+            <div>
+                <md-button class="md-raised md-background n" id="add-item-button"                      
+                           ui-sref="app.locations.add-location"
+                           aria-label="add item" translate translate-attr-aria-label="LOCATIONS.ADD_ITEM">
+                    {{"LOCATIONS.ADD_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table  class="dataTable row-border hover table table-striped">
+                    <thead>
+<!--8-->
+                        <tr>             
+                            <th  st-sort="id">  ID   </th>
+                            <th  >Image    </th>                                                           
+                            <th st-sort="name">Name</th>   
+                             <th st-sort="address">Address</th>
+                            <th st-sort="longitude">Longitude</th>
+                            <th st-sort="latitude">Latitude </th>                                                                                          
+                            <th></th>
+                        </tr>                  
+                    </thead>
+                    <tbody ng-show="!vm.isLoading">
+                        <tr ng-repeat="item in displayed | filter: searchKeyword "  ng-click="vm.itemDetails(item.id)">                         
+                    <td>{{item.id}}</td>
+                    <td><img class="item-image" ng-src="{{item.photo}}"></td>   
+                    <td>{{item.name}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.longitude}}</td>
+                    <td>{{item.latitude}}</td>                                        
+                    <td>
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="More" translate
+                                   translate-attr-aria-label="LOCATIONS.MORE" ng-click="$mdOpenMenu($event)">
+                            <md-icon >more_vert</md-icon>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>                                
+                                <md-button 
+                                    ng-click="vm.editItem(item)"                                   
+                                    translate="LOCATIONS.EDIT_ITEM">  
+                                    Edit item
+                                </md-button>
+                            </md-menu-item>    
+                            <md-menu-item>
+                                <md-button ng-click="vm.deleteItemConfirm(item, ev)"
+                                           translate="LOCATIONS.DELETE_ITEM">
+                                    Delete item
+                                </md-button>
+                            </md-menu-item> 
+                        </md-menu-content>
+                    </md-menu>
+                    </td>
+                    </tr>
+                    </tbody>                    
+                    <tbody ng-show="vm.isLoading">
+                        <tr>
+                            <td colspan="12" class="text-center">Loading ... </td>
+                        </tr>
+                    </tbody>                   
+                    <tfoot >
+                        <tr >
+                            <td st-pagination=""  st-items-by-page="itemsByPage" st-displayed-pages="20" colspan="11"> </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        
+    </div>
+    <!-- / CENTER -->
+
+</div>
+
+
+

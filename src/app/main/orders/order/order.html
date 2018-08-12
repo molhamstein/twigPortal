@@ -1,0 +1,164 @@
+<div class="twig add-item page-layout  tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg " layout="row" layout-align="space-between center" flex>
+            <div class="white-fg" layout="row" layout-align="start center" flex>
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.orders"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <!-- <md-button class="md-raised md-background "
+                           ui-sref="app.orders.add-order"
+                           aria-label="add item" translate translate-attr-aria-label="ORDERS.ADD_ITEM">
+                    {{"ORDERS.ADD_ITEM"| translate}}
+                </md-button> -->
+                <md-button class="md-raised md-background "
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="ORDERS.EDIT_ITEM">
+                    {{"ORDERS.EDIT_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="ORDERS.DELETE_ITEM">
+                    {{"ORDERS.DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="row" flex>
+        <md-card  flex='50'>
+            <md-list flex>
+                <md-list-item class="md-2-line">
+                    <md-icon>account_box</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.user.name}}</h3>
+                        <p translate="ORDERS.USER">cost</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>account_box</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.to_user.name}}</h3>
+                        <p translate="ORDERS.TOUSER">cost</p>
+                    </div>
+                </md-list-item>
+
+                <md-list-item class="md-2-line">
+                    <md-icon>today</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.created_at | date : 'dd/MM/yyyy'}}</h3>
+                        <p translate="ORDERS.CREATED_AT">Created At</p>
+                    </div>
+                </md-list-item>
+
+                <md-list-item class="md-2-line">
+                    <md-icon>shopping_basket</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.product.name}}</h3>
+                        <p translate="ORDERS.PRODUCT">location</p>
+                    </div>
+                </md-list-item>
+
+
+
+
+                <md-list-item class="md-2-line">
+                    <md-icon>public</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.delivery_zone.name}}</h3>
+                        <p translate="ORDERS.DELIVERY_ZONE">business</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>attach_money</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.delivery_cost}}</h3>
+                        <p translate="ORDERS.DELIVERY_COST">cost</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>clear_all</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.quantity}}</h3>
+                        <p translate="ORDERS.QUANTITY">cost</p>
+                    </div>
+                </md-list-item>
+
+
+
+
+
+
+            </md-list>
+        </md-card>
+        <md-card  flex="50">
+            <md-list flex>
+
+                <md-list-item class="md-2-line">
+                    <md-icon>shopping_cart</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.order}}</h3>
+                        <p translate="ORDERS.ORDER">cost</p>
+                    </div>
+                </md-list-item>
+                <!--                     <md-list-item class="md-2-line">
+                                        <md-icon>shopping_cart</md-icon>
+                                        <div class="md-list-item-text">
+                                            <h3>{{vm.item.order_no}}</h3>
+                                            <p translate="ORDERS.NO">Name</p>
+                                        </div>
+                                    </md-list-item>-->
+                <md-list-item class="md-2-line">
+                    <md-icon>payment</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.payment_method}}</h3>
+                        <p translate="ORDERS.PAYMENT_METHOD">cost</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>shopping_cart</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.total_order}}</h3>
+                        <p translate="ORDERS.TOTAL_ORDER">cost</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>payment</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.payment_state}}</h3>
+                        <p translate="ORDERS.PAYMENT_STATE">cost</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-icon>public</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.delivery_state}}</h3>
+                        <p translate="ORDERS.DELIVERY_STATE">cost</p>
+                    </div>
+                </md-list-item>
+
+
+                <md-list-item class="md-2-line">
+                    <md-icon>description</md-icon>
+                    <div class="md-list-item-text">
+                        <h3>{{vm.item.notes}}</h3>
+                        <p translate="ORDERS.NOTES">cost</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-card>
+    </md-content>
+</div>

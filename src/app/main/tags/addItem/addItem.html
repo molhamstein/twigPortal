@@ -1,0 +1,56 @@
+
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>            
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.tags"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+
+                <div class="h2">                  
+                    <span translate="{{translate + 'ADD_ITEM'}}">Add Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span>{{translate + 'SAVE'| translate}}</span>
+            </md-button>           
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="row" layout-align="center center">
+        <md-card  md-theme-watch flex>                   
+            <md-card-content>               
+                <md-input-container class="md-block">
+                    <label translate="{{translate + 'NAME'}}">name</label>
+                    <md-icon>local_offer</md-icon>
+                    <input ng-model="vm.item.name" 
+                           type="text"
+                           required autofocus>
+                </md-input-container>  
+                <!--<md-input-container class="md-icon-float md-block">-->
+                    <md-switch ng-model="vm.item.is_featured" aria-label="Switch 1">
+                                {{translate + 'IS_FEATURED' | translate}}
+                            </md-switch>        
+<!--                    
+                    <label translate="{{translate + 'IS_FEATURED'}}">is_featured</label>
+                    <md-icon>star</md-icon>
+                    <input ng-model="vm.item.is_featured" >-->
+                <!--</md-input-container>-->  
+                <md-input-container class="md-icon-float md-block">
+                    <label translate="{{translate + 'WEIGHT'}}">Weight</label>
+                    <md-icon>view_stream</md-icon>
+                    <input ng-model="vm.item.weight" 
+                           type="number">
+                </md-input-container>                             
+            </md-card-content>
+        </md-card>
+    </md-content>   
+</div>
+

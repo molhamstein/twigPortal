@@ -1,0 +1,117 @@
+
+<div class=" items page-layout carded fullwidth" layout="row">
+
+    <div class="top-bg md-accent-bg"></div>
+
+    <div st-pipe="vm.callServer" st-table="displayed"          class="center"   layout="column" flex>
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon>account_circle</md-icon>
+                    <span translate="USERS.ITEMS">Items</span>
+                </div>
+                <div class="order-count secondary-text">
+                    <span translate="USERS.ALL_ITEMS">Total Items: </span>
+                    <span>{{total_pages}}</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>               
+                <!--                <input st-search class="search-input " type="search"
+                                       placeholder="Search"
+                                       translate translate-attr-placeholder="USERS.SEARCH" flex/>-->
+            
+                <md-input-container flex>
+                     <md-icon class="white-text icon search-icon">search</md-icon>
+                    <label>{{'USERS.SEARCH'| translate}}</label>
+                    <input ng-model="searchKeyword" flex>
+                </md-input-container>             
+
+            </div>
+            <div>
+<!--                <md-button class="md-raised md-background" id="delete-item-button"
+                           ng-click="vm.deleteSelectedItems($event)"
+                           aria-label="add item"vtranslate-attr-aria-label="USERS.DELETE_ITEM">
+                    {{"USERS.DELETE_ITEM"| translate}}
+                </md-button>-->
+                <md-button class="md-raised md-background n" id="add-item-button"                      
+                           ui-sref="app.users.add-user"
+                           aria-label="add item" translate translate-attr-aria-label="USERS.ADD_ITEM">
+                    {{"USERS.ADD_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+
+        <div class="content-card" layout="column" flex>
+            <div class="content fullpage-datatable" layout="column" flex>
+                <table    id='Dtable'       
+                          class="dataTable row-border hover table table-striped">
+                    <thead>
+                        <tr>             
+                            <th  st-sort="id">  ID   </th>
+                            <th  >Image    </th>                                                           
+                            <th  st-sort="name">Name</th>                                                                          
+                            <th  st-sort="email"> E-mail  </th>                                                              
+                            <th st-sort="type">Type  </th>                                      
+                            <th st-sort="status">Active</th>
+                            <th></th>
+                        </tr>                            
+                    </thead>
+                    <tbody ng-show="!vm.isLoading">
+                        <tr ng-repeat="item in  displayed | filter: searchKeyword ">                           
+                            <td ng-click="vm.itemDetails(item.id)">{{item.id}}</td>
+                            <td ng-click="vm.itemDetails(item.id)"><img class="item-image" ng-src="{{item.photo}}"></td>                
+                            <td ng-click="vm.itemDetails(item.id)">{{item.name}}</td>
+                            <td ng-click="vm.itemDetails(item.id)">{{item.email}}</td>                   
+                            <td ng-click="vm.itemDetails(item.id)">{{item.type}}</td>
+                            <td ng-click="vm.itemDetails(item.id)">                                
+                                <span ng-if="item.status === 'Active'">
+                                    <i class="icon-checkbox-marked-circle green-500-fg"></i>
+                                </span>
+                                <span ng-if="item.status === 'Inactive'">
+                                    <i class="icon-cancel red-500-fg"></i>
+                                </span>
+                            </td>                           
+                            <td>
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="More" translate
+                                   translate-attr-aria-label="USERS.MORE" ng-click="$mdOpenMenu()">
+                            <md-icon >more_vert</md-icon>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>                                
+                                <md-button 
+                                    ng-click="vm.editItem($event, item)"                                                                   
+                                    translate="USERS.EDIT_ITEM">  
+                                    Edit item
+                                </md-button>
+                            </md-menu-item> 
+
+                            <md-menu-item>
+                                <md-button ng-click="vm.deleteItemConfirm(item, vm.items)"
+                                           translate="USERS.DELETE_ITEM">
+                                    Delete item
+                                </md-button>
+                            </md-menu-item>                            
+                        </md-menu-content>
+                    </md-menu>
+                    </td>
+                    </tr>
+                    </tbody >                   
+                    <tbody ng-show="vm.isLoading">
+                        <tr>
+                            <td colspan="7" class="text-center">Loading ... </td>
+                        </tr>
+                    </tbody>                   
+                    <tfoot >
+                        <tr >
+                            <td st-pagination=""  st-items-by-page="itemsByPage" st-displayed-pages="20" colspan="7"> </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>            
+        </div>       
+    </div>
+</div>

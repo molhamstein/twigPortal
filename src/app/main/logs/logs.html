@@ -1,0 +1,157 @@
+
+<div class=" items page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div  st-pipe="vm.callServer" st-table="displayed" class="center" layout="column" flex>
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon>insert_chart</md-icon>
+                    <span translate="LOGS.ITEMS">Items</span>
+                </div>
+                <div class="order-count secondary-text">
+                    <span translate="LOGS.ALL_ITEMS">Total Items: </span>
+                    <span>{{total_pages}}</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>
+                <md-input-container flex>
+                    <md-icon class="white-text icon search-icon">search</md-icon>
+                    <label>{{'USERS.SEARCH'| translate}}</label>
+                    <input ng-model="searchKeyword" flex>
+                </md-input-container>         
+
+            </div>
+            <div>
+                <md-input-container>
+                    <label>Action</label>
+                    <md-select ng-model="action_filter" ng-change="onChangeFilter()">
+                        <md-option   value='{{null}}'><em>None</em></md-option>
+                        <md-option  value="{{'IGNORE_TWIG'}}" >Ignore twig</md-option>
+                        <md-option  value="{{'TODO_TWIG'}}" >Todo Twig</md-option>
+                        <md-option  value="{{'TRIED_TWIG'}}" >Tried Twig</md-option>
+                        <md-option  value="{{'CREATE_TWIG'}}" >Create Twig</md-option>
+                        <md-option  value="{{'SHARED_TWIG'}}" >Shared Twig</md-option>
+                        <md-option  value="{{'FEELING_CHANGED'}}" >Feeling Changed</md-option>
+                        <md-option  value="{{'SKIP_LOGIN'}}" >Skip Login</md-option>
+                        <md-option  value="{{'ACTION_BUTTON_PRESSED'}}" >Action Button Pressed</md-option>                        
+                    </md-select>
+                </md-input-container>
+                <!--                <md-button class="md-raised md-background" id="delete-item-button"
+                                       ng-click="vm.deleteSelectedItems($event)"
+                                       aria-label="add item"vtranslate-attr-aria-label="USERS.DELETE_ITEM">
+                                {{"USERS.DELETE_ITEM" | translate}}
+                            </md-button>-->
+
+                <!--                <md-button class="md-raised md-background" id="add-item-button"                      
+                                           ui-sref="app.tags.add-tag"
+                                           aria-label="add item" translate translate-attr-aria-label="TAGS.ADD_ITEM">
+                                    {{"TAGS.ADD_ITEM"| translate}}
+                                </md-button>-->
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table class="dataTable row-border hover table table-striped">
+                    <thead>
+                        <tr>             
+                            <th  st-sort="user_id"> User  </th>                         
+                            <th ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                            && action_filter !== 'SKIP_LOGIN'
+                                            && action_filter !== 'FEELING_CHANGED'" st-sort="object_id">Twig</th>   
+                            <th ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                            && action_filter !== 'SKIP_LOGIN'
+                                            && action_filter !== 'FEELING_CHANGED'" st-sort="object_id">Twig User</th>   
+                            <th ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                            && action_filter !== 'SKIP_LOGIN'
+                                            && action_filter !== 'FEELING_CHANGED'" st-sort="object_id">Twig Location</th>   
+                            <th ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                            && action_filter !== 'SKIP_LOGIN'
+                                            && action_filter !== 'FEELING_CHANGED'" st-sort="object_id">Twig Business</th>   
+                            <th ng-if="action_filter === 'ACTION_BUTTON_PRESSED'
+                                            && action_filter !== 'SKIP_LOGIN'
+                                            && action_filter !== 'FEELING_CHANGED'" st-sort="object_id">Twig Button</th>   
+                            <th st-sort="action">Action</th>                         
+                            <th st-sort="hint">Hint</th>                                  
+                            <th></th>
+                        </tr>           
+
+                    </thead>
+                    <tbody ng-show="!vm.isLoading">
+                        <tr ng-repeat="item in displayed| filter: searchKeyword" >
+                            <td >{{item.user.id}}</td>                    
+                            <td ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                                && action_filter !== 'SKIP_LOGIN'
+                                                && action_filter !== 'FEELING_CHANGED'">{{item.twig.products[0].name}}</td>
+                            <td ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                                && action_filter !== 'SKIP_LOGIN'
+                                                && action_filter !== 'FEELING_CHANGED'">{{item.twig.user.name}}</td>
+                            <td ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                                && action_filter !== 'SKIP_LOGIN'
+                                                && action_filter !== 'FEELING_CHANGED'">{{item.twig.location.name}}</td>
+                            <td ng-if="action_filter !== 'ACTION_BUTTON_PRESSED'
+                                                && action_filter !== 'SKIP_LOGIN'
+                                                && action_filter !== 'FEELING_CHANGED'">{{item.twig.business.name}}</td>
+                            <td ng-if="action_filter === 'ACTION_BUTTON_PRESSED'
+                                                && action_filter !== 'SKIP_LOGIN'
+                                                && action_filter !== 'FEELING_CHANGED'">{{item.twig_btn.title}}</td>
+                            <td > {{item.action}}       </td>                   
+                            <td >{{item.hint}}</td>                     
+                            <!--                            <td>
+                                                <md-menu>
+                                                    <md-button class="md-icon-button" aria-label="More" translate
+                                                               translate-attr-aria-label="TAGS.MORE" ng-click="$mdOpenMenu()">
+                                                        <md-icon >more_vert</md-icon>
+                                                    </md-button>
+                                                    <md-menu-content width="3">
+                                                        <md-menu-item>                                
+                                                            <md-button 
+                                                                ng-click="vm.editItem(item)"                                                                   
+                                                                translate="TAGS.EDIT_ITEM">  
+                                                                Edit item
+                                                            </md-button>
+                                                        </md-menu-item> 
+                            
+                                                        <md-menu-item>
+                                                            <md-button ng-click="vm.deleteItemConfirm(item, ev)"
+                                                                       translate="TAGS.DELETE_ITEM">
+                                                                Delete item
+                                                            </md-button>
+                                                        </md-menu-item>                            
+                                                    </md-menu-content>
+                                                </md-menu>
+                                                </td>-->
+                        </tr>
+                    </tbody>
+                    </tbody>
+                    <tbody ng-show="vm.isLoading">
+                        <tr>
+                            <td colspan="12" class="text-center">Loading ... </td>
+                        </tr>
+                    </tbody>                   
+                    <tfoot >
+                        <tr >
+                            <td st-pagination=""  st-items-by-page="itemsByPage" st-displayed-pages="20" colspan="11"> </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

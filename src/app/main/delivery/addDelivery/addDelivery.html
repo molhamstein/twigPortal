@@ -1,0 +1,155 @@
+<div ng-form="addItem" class="add-item page-layout" layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                       ui-sref="app.delivery"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <span translate="{{translate + 'ADD_ITEM'}}">Add Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE"
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span translate="{{translate + 'SAVE'}}">Save</span>
+            </md-button>
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <md-card layout="row" felx>
+            <md-list flex="50">
+                <md-list-item class="md-2-line" flex>
+                    <md-input-container flex>
+                        <md-icon>public</md-icon>
+                        <label>{{"DELIVERY.NAME"| translate}}</label>
+                        <input ng-model="vm.item.name" type="text" required flex>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <md-input-container>
+                        <md-icon>attach_money</md-icon>
+                        <label>{{"DELIVERY.COST"| translate}}</label>
+                        <input ng-model="vm.item.cost" type="number" required>
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-list flex="50">
+              <md-radio-group ng-model="locationBusiness" ng-change="locationBusinessChange()" layout="row" layout-align="center">
+                  <md-radio-button value="location" >Location</md-radio-button>
+                  <md-radio-button value="business" > Business </md-radio-button>
+              </md-radio-group>
+
+                <md-list-item class="md-2-line" flex ng-show="locationBusiness === 'location'">
+                    <md-icon class="no-margin-icon">location_on</md-icon>
+                    <md-autocomplete                  flex
+                                                      md-delay="1000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedLocation"
+                                                      md-search-text="searchLocation"
+                                                      md-selected-item-change="selectedLocationChange(i)"
+                                                      md-items="i in onChangeAddress(searchLocation)"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-floating-label="{{'DELIVERY.LOCATION'| translate}}">
+                        <md-item-template>
+                            <span md-highlight-text="searchLocation" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No Locations matching {{searchLocation}} were found.
+                        </md-not-found>
+                    </md-autocomplete>
+                </md-list-item>
+
+
+                <md-list-item class="md-2-line" flex ng-show="locationBusiness === 'business'">
+                    <md-icon class="no-margin-icon">business</md-icon>
+                    <md-autocomplete                  flex
+                                                      md-delay="1000"
+                                                      md-no-cache="false"
+                                                      md-selected-item="selectedBusiness"
+                                                      md-search-text="searchBusiness"
+                                                      md-selected-item-change="selectedBusinessChange(i)"
+                                                      md-items="i in onChangeBusiness(searchBusiness)"
+                                                      md-item-text="i.name"
+                                                      md-min-length="0"
+                                                      md-floating-label="{{'DELIVERY.BUSINESS'| translate}}">
+                        <md-item-template>
+                            <span md-highlight-text="searchBusiness" md-highlight-flags="^i">{{i.name}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No Businesses matching {{searchBusiness}} were found.
+                        </md-not-found>
+                    </md-autocomplete>
+                </md-list-item>
+            </md-list>
+        </md-card>
+        <md-card flex>
+
+            <!--layout-align="start center" layout="row"-->
+            <md-card-content  layout="column" layout-align="center space-around">
+                <!--                <md-slider-container >
+                                    <md-input-container>
+                                        <input flex type="number" ng-model="time.days" aria-label="days" aria-controls="days-slider">
+                                    </md-input-container>
+                                    <md-slider ng-model="time.days" min="1" max="30" aria-label="days" id="days-slider" class="md-accent" md-vertical
+                                               md-range></md-slider>
+                                    </md-slider>
+                                    <h5>Days</h5>
+                                </md-slider-container>
+                                <md-slider-container ng-disabled="time.days === 30">
+                                    <md-input-container>
+                                        <input flex type="number" ng-model="time.hours" aria-label="hours" aria-controls="hours-slider">
+                                    </md-input-container>
+                                    <md-slider ng-model="time.hours" min="1" max="24" aria-label="hours" id="hours-slider" class="md-accent" md-vertical
+                                               md-range></md-slider>
+                                    </md-slider>
+                                    <h5>Hours</h5>
+                                </md-slider-container>
+                                <md-slider-container ng-disabled="time.days === 30 || (time.days === 29 && time.hours === 24)">
+                                    <md-input-container>
+                                        <input flex type="number" ng-model="time.minutes" aria-label="minutes" aria-controls="minutes-slider">
+                                    </md-input-container>
+                                    <md-slider ng-model="time.minutes" min="5" max="60" aria-label="minutes" id="minutes-slider" class="md-accent" md-vertical
+                                               md-range></md-slider>
+                                    </md-slider>
+                                    <h5>Minutes</h5>
+                                </md-slider-container>
+                                <md-icon >timer</md-icon>
+                                <md-subheader class="md-primary">Delivery Time:</md-subheader>
+                                <md-subheader class="md-primary"><span class="md-primary">{{time.days}}</span> Days, {{time.hours}} Hours and {{time.minutes}} Minutes</md-subheader>
+
+                -->
+
+                <md-subheader class="md-primary">Delivery Time: {{dTime}} {{dTimeObj.name}}</md-subheader>
+                <div  layout="row" layout-align="center space-around">
+                    <md-select ng-model="dTimeObj" required ng-change="onChangeDTime('reset')" flex="20">
+                        <md-option ng-repeat="t in dTimes" ng-value="t" >{{t.name}}</md-option>
+                    </md-select>
+                </div>
+                    <md-slider-container  flex >
+                        <md-input-container>
+                            <input flex type="number" ng-model="dTime" aria-label="minutes" aria-controls="minutes-slider" required
+                                   ng-change="onChangeDTime()">
+                        </md-input-container>
+                        <md-slider ng-model="dTime" min="{{dTimeObj.min}}" max="{{dTimeObj.max}}" aria-label="minutes" id="minutes-slider" class="md-accent"
+                                   md-range ng-change="onChangeDTime()"></md-slider>
+                        </md-slider>
+                        <h5>{{dTimeObj.name}}</h5>
+                    </md-slider-container>
+
+                <!--<md-icon >timer</md-icon>-->
+
+                <!--<md-subheader class="md-primary">{{dTimeSeconds}} Milliseconds</md-subheader>-->
+                <!--<md-subheader class="md-primary"><span class="md-primary">{{time.days}}</span> Days, {{time.hours}} Hours and {{time.minutes}} Minutes</md-subheader>-->
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>

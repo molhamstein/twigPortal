@@ -1,0 +1,138 @@
+<div class="user page-layout add-item tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="space-between center" flex>         
+            <div layout="row">
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.users"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <!--<div layout="column" layout-align="start start">-->
+                    <div class="h2">
+                        <!--<span translate="USERS.USER">User</span>-->
+                        <!--<span>{{vm.item.name}}</span>-->
+                    </div>
+                <!--</div>-->
+            </div>
+            <div>
+                <md-button class="md-raised md-background " id="add-item-button"                      
+                           ui-sref="app.users.add-user"
+                           aria-label="add item" translate translate-attr-aria-label="USERS.ADD_ITEM">
+                    {{"USERS.ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background " id="add-item-button"                                            
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="USERS.EDIT_ITEM">
+                    {{"USERS.EDIT_ITEM"| translate}}
+                </md-button>
+
+                <md-button ng-disabled="vm.item.status==='Inactive'" class="md-raised md-background n" id="add-item-button"                      
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="USERS.ADD_ITEM">
+                    {{"USERS.DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row" flex>
+            <md-card flex>
+                <img  src="{{vm.item.cover|| defaultBackground}}" class="cover md-card-image" alt="avatar">
+                <md-card-title>
+                    <md-card-title-text>
+                        <md-list>    
+                            <md-list-item class="md-2-line">
+                                <md-icon>account_box</md-icon>  
+                                <div class="md-list-item-text">     
+                                    <h3>{{vm.item.name}}</h3>
+                                    <p translate="{{translate + 'NAME'}}">Name</p>
+                                </div>                                 
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon>email</md-icon>                               
+                                <div class="md-list-item-text">                                              
+                                    <h3>{{vm.item.email}}</h3>
+                                    <p translate="{{translate + 'EMAIL'}}">Email</p>
+                                </div>                                 
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon>done</md-icon>  
+                                <div class="md-list-item-text"> 
+                                    <h3>{{vm.item.status}}</h3>
+                                    <p translate="{{translate + 'STATUS'}}">Status</p>
+                                </div>                                 
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon>account_circle</md-icon>  
+                                <div class="md-list-item-text">   
+                                    <h3>{{vm.item.type}}</h3>
+                                    <p translate="{{translate + 'TYPE'}}">Type</p>
+                                </div>                                 
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon>star</md-icon>  
+                                <div class="md-list-item-text">   
+                                    <h3>{{vm.item.score}}</h3>
+                                    <p translate="{{translate + 'SCORE'}}">Score</p>
+                                </div>                                 
+                            </md-list-item>
+                        </md-list>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media">
+                            <img src="{{vm.item.photo || defaultAvatar}}">
+                            <!--<img src="{{defaultAvatar}}">-->
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>                
+                <!--<md-card-content>-->
+
+
+                <!--                    <table class="simple" ms-responsive-table>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th translate="{{translate + 'NAME'}}">Name</th>
+                                                <th translate="{{translate + 'EMAIL'}}">Email</th>
+                                                <th translate="USERS.MOBILE_NUMBER">Phone</th>
+                                                <th translate="{{translate + 'STATUS'}}">Status</th>
+                                                <th translate="{{translate + 'TYPE'}}">Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img class="avatar" ng-src="{{vm.item.photo}}">
+                                                </td>
+                                                <td>
+                                                    <div layout="row" layout-align="start center">                                                
+                                                        <span class="name text-nowrap">{{vm.item.name}}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="email">{{vm.item.email}}</span>
+                                                </td>
+                                                                                        <td>
+                                                                                            <span class="phone">{{vm.item.mobile_number}}</span>
+                                                                                        </td>
+                                                <td>
+                                                    <span class="phone">{{vm.item.status}}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="phone">{{vm.item.type}}</span>
+                                                </td>                                       
+                                            </tr>
+                                        </tbody>
+                                    </table>-->
+                <!--</md-card-content>-->
+            </md-card>
+        </div>
+    </md-content>
+</div>
+<!-- / CONTENT -->
+

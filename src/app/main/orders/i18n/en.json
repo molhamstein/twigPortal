@@ -1,0 +1,40 @@
+{
+    "ORDERS": {
+        "ITEMS": "ORDERS",
+        "ITEM": "Order",
+        "SEARCH": "Search",
+        "BACK": "Back",
+        "SELECT_ALL": "Select all",
+        "SELECT_NONE": "Select none",
+        "SELECTED": "selected",
+        "DELETE_SELECTED": "Delete selected",
+        "ALL_ITEMS": "Total Orders",
+        "MORE": "More",
+        "DELETE_ITEM": "Delete Order",
+        "DELETE": "DELETE",
+        "SAVE": "SAVE",
+        "ADD_ITEM": "Add Order",
+        "EDIT_ITEM":"Edit Order",
+        "NO_RESULTS": "No results.."         ,
+        "USER":"User",
+        "TOUSER":"To User",
+        "DELIVERY_ZONE":"Delivery Zone",
+        "DELIVERY_ADDRESS":"Delivery Address",
+        "PRODUCT":"Product",
+        "PHONE":"Phone Number",
+        "QUANTITY":"Quantity",
+        "NOTES":"Notes",
+
+        "NO":"Order Number",
+        "PAYMENT_STATE":"Payment State",
+        "PAYMENT_METHOD":"Payment Method",
+        "DELIVERY_STATE":"Delivery State",
+        "ORDER":"Order",
+        "DELIVERY_COST":"Delivery Cost",
+        "TOTAL_ORDER":"Total Order",
+        "CREATED_AT": "Created At",
+        "SEARCH_PRODUCT": "Search Product",
+        "SEARCH_USER": "Search User"
+
+    }
+}

@@ -1,0 +1,20 @@
+.twig {
+
+    > .header {
+        height: 50px;
+        min-height: 50px;
+        max-height: 120px;
+
+        .goto-orders-button {
+            margin-right: 16px;
+        }
+
+    }    
+    .order-detail-form-container {
+        padding: 24px;
+    }
+    md-content md-card .active-btn{
+        border-left: 10px solid green;
+    }
+
+}

@@ -1,0 +1,93 @@
+<div class="user page-layout add-item tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                       ui-sref="app.tags"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <!--<span translate="USERS.USER">User</span>-->
+                    <span>{{vm.item.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row" flex>
+            <md-card flex>                
+                <md-card-content>
+                    <md-list>    
+                        <md-list-item class="md-2-line">
+                            <md-icon>local_offer</md-icon>  
+                            <div class="md-list-item-text">     
+                                <h3>{{vm.item.name}}</h3>
+                                <p translate="{{translate + 'NAME'}}">Name</p>
+                            </div>                                 
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>star</md-icon>                               
+                            <div class="md-list-item-text">                                                                             
+                                 <h3 ng-show="vm.item.is_featured === 1">Yes</h3>
+                                <h3 ng-show="vm.item.is_featured === 0">No</h3> 
+                                <p translate="{{translate + 'IS_FEATURED'}}">Is Featured</p>
+                            </div>                                 
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon>view_stream</md-icon>                              
+                            <div class="md-list-item-text"> 
+                                 <h3>{{vm.item.weight}}</h3>
+                                <p translate="{{translate + 'WEIGHT'}}">Weight</p>
+                            </div>                                 
+                        </md-list-item>                       
+                    </md-list>
+                    
+<!--                    <table class="simple" ms-responsive-table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th translate="{{translate + 'NAME'}}">Name</th>
+                                <th translate="{{translate + 'EMAIL'}}">Email</th>
+                                <th translate="USERS.MOBILE_NUMBER">Phone</th>
+                                <th translate="{{translate + 'STATUS'}}">Status</th>
+                                <th translate="{{translate + 'TYPE'}}">Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img class="avatar" ng-src="{{vm.item.photo}}">
+                                </td>
+                                <td>
+                                    <div layout="row" layout-align="start center">                                                
+                                        <span class="name text-nowrap">{{vm.item.name}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="email">{{vm.item.email}}</span>
+                                </td>
+                                                                        <td>
+                                                                            <span class="phone">{{vm.item.mobile_number}}</span>
+                                                                        </td>
+                                <td>
+                                    <span class="phone">{{vm.item.status}}</span>
+                                </td>
+                                <td>
+                                    <span class="phone">{{vm.item.type}}</span>
+                                </td>                                       
+                            </tr>
+                        </tbody>
+                    </table>-->
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>
+<!-- / CONTENT -->
+

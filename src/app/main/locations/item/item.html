@@ -1,0 +1,106 @@
+<div class="feeling page-layout add-item tabbed" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="space-between center" flex>
+            <div layout="row">
+                <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"
+                           ui-sref="app.locations"
+                           translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                    <md-icon >arrow_back</md-icon>
+                </md-button>
+
+                <div layout="column" layout-align="start start">
+                    <div class="h2">
+                        <!--<span translate="FEELINGS.ITEMS">feelings</span>-->
+                        <span>{{vm.item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-raised md-background "              
+                           ui-sref="app.locations.add-location"
+                           aria-label="add item" translate translate-attr-aria-label="{{translate + 'ADD_ITEM'}}">
+                    {{translate + "ADD_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "                     
+                           ng-click="vm.editItem(vm.item)"
+                           aria-label="edit item" translate translate-attr-aria-label="{{translate + 'EDIT_ITEM'}}">
+                    {{translate + "EDIT_ITEM"| translate}}
+                </md-button>
+                <md-button class="md-raised md-background "                    
+                           ng-click="vm.deleteItemConfirm(vm.item, ev)"
+                           aria-label="delete item" translate translate-attr-aria-label="{{translate + 'DELETE_ITEM'}}">
+                    {{translate + "DELETE_ITEM"| translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row">
+            <md-card md-theme-watch flex>
+                <img  ng-src="{{vm.item.photo|| defaultBackground}}" class="md-card-image" alt="locations">                        
+                <md-card-content>
+                    <md-list>    
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>  
+                            <div class="md-list-item-text">         
+                                <h3>{{vm.item.name}}</h3>
+                                <p translate="LOCATIONS.NAME">name</p>
+                            </div>                                 
+                        </md-list-item>  
+                        <md-list-item class="md-2-line">
+                            <md-icon>location_on</md-icon>  
+                            <div class="md-list-item-text">         
+                                <h3>{{vm.item.address}}</h3>
+                                <p translate="LOCATIONS.ADDRESS">Address</p>
+                            </div>                                 
+                        </md-list-item>     
+                        <md-list-item class="md-2-line">
+                            <md-icon >business</md-icon>  
+                            <div class="md-list-item-text">  
+                                <h3>{{vm.item.business}}</h3>
+                                <p translate="LOCATIONS.BUSINESS">Business</p>
+                            </div>                                 
+                        </md-list-item>   
+<!--                        <md-list-item class="md-2-line">
+                            <md-icon >location_on</md-icon>  
+                            <div class="md-list-item-text">  
+                                <h3>{{vm.item.google_place_id}}</h3>
+                                <p translate="LOCATIONS.GOOGL_EPLACE_ID">Google Place ID</p>
+                            </div>                                 
+                        </md-list-item>   -->
+                    </md-list>                                 
+                </md-card-content>                      
+            </md-card>                            
+
+            <md-card flex>               
+                <div class="map-canvas" >
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom"  options="options">
+                        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="2">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>      
+                </div>
+                <md-list>
+                     <md-list-item class="md-2-line">
+                            <md-icon >location_on</md-icon>  
+                            <div class="md-list-item-text">  
+                                <h3>{{vm.item.latitude}}</h3>
+                                <p translate="LOCATIONS.LATITUDE">Latitude</p>
+                            </div>                                 
+                        </md-list-item>     
+                        <md-list-item class="md-2-line">
+                            <md-icon >location_on</md-icon>  
+                            <div class="md-list-item-text">  
+                                <h3>{{vm.item.longitude}}</h3>
+                                <p translate="LOCATIONS.LONGITUDE">Longitude</p>
+                            </div>                                 
+                        </md-list-item>   
+                </md-list>
+            </md-card>
+        </div> 
+    </md-content>
+    <!-- / CONTENT -->
+</div>

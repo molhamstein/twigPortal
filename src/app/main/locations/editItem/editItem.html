@@ -1,0 +1,144 @@
+<div ng-form="addItem" class="maps add-item " layout="column">
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <!--ng-click="vm.gotoItems()"-->
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to items"                      
+                       ui-sref="app.locations"
+                       translate translate-attr-aria-label="{{translate + 'GO_TO_ITEMS'}}">
+                <md-icon >arrow_back</md-icon>
+            </md-button>
+            <div layout="column" layout-align="start start">
+                <div class="h2">                  
+                    <span translate="{{translate + 'EDIT_ITEM'}}">Edit Item</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.submit()"
+                       ng-disabled="addItem.$invalid || addItem.$pristine"
+                       aria-label="SAVE" 
+                       translate-attr-aria-label="{{translate + 'SAVE'}}">
+                <span translate="{{translate + 'SAVE'}}">Save</span>
+            </md-button>
+        </div>
+    </div>
+
+    <md-content class="md-padding" layout="column" layout-align="" flex>
+        <div layout="row" flex>
+
+            <md-card md-theme-watch flex>        
+                <img  ngf-thumbnail="file1 || defaultBackground" class="cover md-card-image" alt="avatar">
+                <div  layout="row" layout-align="center end">
+                    <div class="fileUpload">                                                                      
+                        <md-button 
+                            class="md-icon-button" 
+                            ngf-select
+                            ng-model="file1"
+                            name="file"                                         
+                            ngf-pattern="'image/*'"
+                            ngf-accept="'image/*'"
+                            ngf-resize="{ratio:'6:4',quality: .9,centerCrop: true}">
+                            <md-icon class="material-icons "> photo_camera</md-icon>
+                        </md-button>    
+                    </div>
+                    <div class="fileUpload">
+                        <md-button ng-click="file1 = null;
+                            file1 = ''" class="md-icon-button" >
+                            <md-icon class="material-icons "> clear</md-icon>
+                        </md-button>
+                    </div>
+                </div>    
+                <md-card-content>
+                    <md-list>                                     
+                        <!--                        <md-list-item class="md-2-line" flex >
+                                                    <md-icon>location_on</md-icon>
+                                                    <md-input-container>
+                                                        <label translate="LOCATIONS.ADDRESS">Address</label>
+                                                        <input ng-model="vm.item.address"   required/>
+                                                    </md-input-container>   
+                                                </md-list-item>-->
+                        <md-list-item class="md-2-line" flex >
+                            <md-icon>location_on</md-icon>
+                            <md-autocomplete                  flex  
+                                                              required
+                                                              md-delay="2000"
+                                                              md-no-cache="false"
+                                                              md-selected-item="selectedItem"
+                                                              md-search-text-change="searchTextChange(searchText)"
+                                                              md-search-text="searchText"
+                                                              md-selected-item-change="selectedItemChange(i)"
+                                                              md-items="i in onChangeAddress(searchText)"
+                                                              md-item-text="i.name"
+                                                              md-min-length="0"
+                                                              md-floating-label="{{'LOCATIONS.NAME'| translate}}">                                
+                                <md-item-template>                                    
+                                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{i.name}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No addresses matching {{searchText}} were found.
+                                    <!--<a ng-click="newState(searchText)">Create a new one!</a>-->
+                                </md-not-found>
+                            </md-autocomplete>                           
+                        </md-list-item>  
+                        <md-list-item class="md-2-line" flex >
+                            <md-icon>location_on</md-icon>
+                            <md-input-container>
+                                <label translate="LOCATIONS.ADDRESS">Address</label>
+                                <input ng-model="item.address"  />
+                            </md-input-container>                              
+                        </md-list-item>                                         
+                        <md-list-item class="md-2-line">
+                            <md-icon >business</md-icon>
+                            <md-autocomplete                  flex  
+                                                              
+                                                              md-delay="2000"
+                                                              md-no-cache="false"
+                                                              md-selected-item="selectedBusiness"
+                                                              md-search-text-change="searchBusinessChange(searchBusiness)"
+                                                              md-search-text="searchBusiness"
+                                                              md-selected-item-change="selectedBusinessChange(i)"
+                                                              md-items="i in onChangeBusiness(searchBusiness)"
+                                                              md-item-text="i.name"
+                                                              md-min-length="0"
+                                                              md-floating-label="{{'LOCATIONS.BUSINESS'| translate}}">                                
+                                <md-item-template>                                    
+                                    <span md-highlight-text="searchBusiness" md-highlight-flags="^i">{{i.name}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No addresses matching {{searchBusiness}} were found.                                  
+                                </md-not-found>
+                            </md-autocomplete>                                                                   
+                        </md-list-item>   
+                    </md-list>
+                </md-card-content>                     
+            </md-card>
+            <md-card flex>               
+                <div class="map-canvas2" >
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+                        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="1">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>      
+                </div>
+                <md-list>
+                    <md-list-item class="md-2-line" flex >
+                        <md-icon>location_on</md-icon>
+                        <md-input-container>
+                            <label translate="LOCATIONS.LONGITUDE">Longitude</label>
+                            <input ng-model="marker.coords.longitude"type="number"  required/>
+                        </md-input-container>                              
+                    </md-list-item>         
+                    <md-list-item class="md-2-line" flex >
+                        <md-icon>location_on</md-icon>
+                        <md-input-container>
+                            <label translate="LOCATIONS.LATITUDE">Latitude</label>
+                            <input ng-model="marker.coords.latitude" type="number"  required/>
+                        </md-input-container>                              
+                    </md-list-item>         
+                </md-list>
+            </md-card>
+        </div>
+
+    </md-content>
+    <!-- / HEADER -->
+
+</div>

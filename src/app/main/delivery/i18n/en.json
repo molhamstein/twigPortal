@@ -1,0 +1,24 @@
+{
+    "DELIVERY": {
+        "ITEMS": "DELIVERY ZONES",
+        "ITEM": "Delivery Zone",
+        "SEARCH": "Search",
+        "BACK": "Back",
+        "SELECT_ALL": "Select all",
+        "SELECT_NONE": "Select none",
+        "SELECTED": "selected",
+        "DELETE_SELECTED": "Delete selected",
+        "ALL_ITEMS": "Total Delivery Zones",
+        "MORE": "More",
+        "DELETE_ITEM": "Delete Delivery Zone",
+        "DELETE": "DELETE",
+        "SAVE": "SAVE",
+        "ADD_ITEM": "Add Delivery Zone",
+        "EDIT_ITEM":"Edit Delivery Zone",
+        "NO_RESULTS": "No results..",
+        "NAME":"Name",
+        "COST":"Cost",
+        "LOCATION":"Location",
+        "BUSINESS":"Business"        
+    }
+}
