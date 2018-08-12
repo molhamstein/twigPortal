@@ -22,7 +22,7 @@ function createServerTask(name, pre, root) {
     gulp.task(name, pre, function() {
         connect.server({
             root: root,
-            port: 3002,
+            port: 3001,
             debug: true,
             middleware: function (connect) {
                   return [
