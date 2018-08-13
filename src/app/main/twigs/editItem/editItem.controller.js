@@ -393,7 +393,7 @@ angular
                             delete btn.inputType;
                             delete btn.pattern;
                             if (!btn.action || btn.type === "BUY")
-                                btn.action = "";
+                                btn.action = "buyAction";
                             //else if (vm.item.btns[0].type === "CALL")
                             //vm.item.btns[0].action = "'" + vm.item.btns[0].action + "'";
                             btn.twig_id = vm.item.id;
